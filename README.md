@@ -82,3 +82,12 @@ Once you select the WiSARD classifier, you can change its parameters:
 and then run the classifier on your dataset:
 
 ![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka3.png)
+
+# Experiments
+
+Some tests about WiSARD cross-validation on weka datasets:
+
+| dataset  | Second Header |
+| ------------- | ------------- |
+| contact-lenses  | Content Cell  |
+| Content Cell  | Content Cell  |

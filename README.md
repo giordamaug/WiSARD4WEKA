@@ -22,9 +22,9 @@ binary pattern recognition.
 For more information on the WiSARD classifier implemented in the WiSARD4WEKA package, see:
 
 <pre>
-Massimo De Gregorio and Maurizio Giordano (2018).<br> 
+Massimo De Gregorio and Maurizio Giordano (2018). 
 <i>An experimental evaluation of weightless neural networks for 
-multi-class classification</i>.<br> 
+multi-class classification</i>.
 Journal of Applied Soft Computing. Vol.72. pp. 338-354<br>
 </pre>
 

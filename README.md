@@ -45,6 +45,21 @@ If you use this software, please cite it as:
 }
 </pre>
 
+# Building
+
+This repository includes all sources, documentation and libraries to build the WiSARD4WEKA
+package and jars. You can build the package jars by using the Apache <code>ant</code> utility:
+
+<pre>
+ant -f build_package.xml -Dpackage=WiSARD exejar
+</pre>
+
+Or you can build locally the package to be imported in your Weka toolkit by mean of the command:
+
+<pre>
+ant -f build_package.xml -Dpackage=WiSARD  make_package
+</pre>
+
 # Install
 
 This repository includes a pre-build package (in zip format) of WiSARD4WEKA that you can 
@@ -53,3 +68,9 @@ install from the the PackageManager of your Weka distribution:
 <pre>
 $ java -cp <your-path-to-weka.jar> weka.core.WekaPackageManager -install-package https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
 </pre>
+
+# Use
+
+After package installation, you can run the WiSARD classifier from the Weka GUI:
+
+[[https://github.com/username/repository/blob/master/img/octocat.png|alt=octocat]]

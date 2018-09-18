@@ -85,7 +85,8 @@ and then run the classifier on your dataset:
 
 # Experiments
 
-Some tests about WiSARD cross-validation on weka datasets:
+Some measure of F-measure of WiSARD of classification on weka datasets (66\% split) in comparison with other methods:
+(NOTE: all methods run in default configuration of paramters)
 
 | method | pima-diabetes  | Glass | ionosphere | iris | labor-neg-data | soybean |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |

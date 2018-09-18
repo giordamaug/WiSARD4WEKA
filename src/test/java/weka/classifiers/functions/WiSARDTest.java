@@ -51,6 +51,9 @@ public class WiSARDTest extends AbstractClassifierTest {
   public Classifier getClassifier() {
     return new WiSARD();
   }
+  /**
+   * Skip regression tests. Only classification with nominal classes is allowed
+   */
   @Override
   public void testRegression() throws Exception {
 	  return;

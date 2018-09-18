@@ -47,8 +47,9 @@ If you use this software, please cite it as:
 
 # Install
 
-You can install WiSARD4WEKA from the the PackageManager of your Weka distribution:
+This repository includes a pre-build package (in zip format) of WiSARD4WEKA that you can 
+install from the the PackageManager of your Weka distribution:
 
-<code>
+<pre>
 $ java -cp <your-path-to-weka.jar> weka.core.WekaPackageManager -install-package https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
-</code>
+</pre>

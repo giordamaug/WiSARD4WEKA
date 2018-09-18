@@ -74,3 +74,11 @@ $ java -cp <your-path-to-weka.jar> weka.core.WekaPackageManager -install-package
 After package installation, you can run the WiSARD classifier from the Weka GUI:
 
 ![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka1.png)
+
+Once you select the WiSARd classifier, you can change its parameters:
+
+![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka2.png)
+
+and then run the classifier on your dataset:
+
+![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka3.png)

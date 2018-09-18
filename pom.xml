@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+  <modelVersion>1.0.1</modelVersion>
 
-  <groupId>nz.ac.waikato.cms.weka</groupId>
-  <artifactId>weka-stable</artifactId>
-  <version>3.6.13-SNAPSHOT</version><!-- weka-version -->
+  <groupId>com.github.giordamaug</groupId>
+  <artifactId>WiSARD</artifactId>
+  <version>2018.09.19-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>weka-stable</name>
-  <description>The Waikato Environment for Knowledge Analysis (WEKA), a machine 
-  learning workbench. This version is tied to the 3rd edition the "Data Mining: 
-  Practical Machine Learning Tools and Techniques" book by Ian H. Witten, Eibe Frank, 
-  Mark A. Hall. Apart from bugfixes, this version does not receive any other updates.
+  <name>WiSARD</name>
+  <description>A multi-class classification method based on the WiSARD weightless neural model. 
+  This version is tied to the article "An experimental evaluation of weightless neural networks 
+  for multi-class classification" Journal Applied Soft Computing, vol.72, by Massimo De Gregorio 
+  and Maurizio Giordano.
   </description>
-  <url>http://www.cms.waikato.ac.nz/ml/weka/</url>
+  <url>http://www.sciencedirect.com/science/article/pii/S156849461830440X</url>
 
   <organization>
-    <name>University of Waikato, Hamilton, NZ</name>
-    <url>http://www.waikato.ac.nz/</url>
+    <name>High Performance Computing and Network Institute - CNR</name>
+    <url>http://www.icar.cnr.it/</url>
   </organization>
 
   <licenses>
     <license>
-      <name>GNU General Public License 2.0</name>
-      <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+      <name>GNU General Public License 3.0</name>
+      <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <developers>
     <developer>
-      <id>wekateam</id>
-      <name>The WEKA Team</name>
-      <email>wekalist@list.scms.waikato.ac.nz</email>
+      <id>giordamug</id>
+      <name>Maurizio Giordano</name>
+      <email>maurizio.giordano@cnr.it</email>
     </developer>
   </developers>
 

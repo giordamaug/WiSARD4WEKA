@@ -31,17 +31,17 @@ Journal of Applied Soft Computing. Vol.72. pp. 338-354<br>
 If you use this software, please cite it as:
 
 <pre>
-&#64;article{DEGREGORIO2018338,<br>
- title = "An experimental evaluation of weightless neural networks for multi-class classification",<br>
- journal = "Applied Soft Computing",<br>
- volume = "72",<br>
- pages = "338 - 354",<br>
- year = "2018",<br>
- issn = "1568-4946",<br>
- doi = "https://doi.org/10.1016/j.asoc.2018.07.052",<br>
- url = "http://www.sciencedirect.com/science/article/pii/S156849461830440X",<br>
- author = "Massimo De Gregorio and Maurizio Giordano",<br>
- keywords = "Weightless neural network, WiSARD, Machine learning"<br>
+&#64;article{DEGREGORIO2018338,
+ title = "An experimental evaluation of weightless neural networks for multi-class classification",
+ journal = "Applied Soft Computing",
+ volume = "72",
+ pages = "338 - 354",
+ year = "2018",
+ issn = "1568-4946",
+ doi = "https://doi.org/10.1016/j.asoc.2018.07.052",
+ url = "http://www.sciencedirect.com/science/article/pii/S156849461830440X",
+ author = "Massimo De Gregorio and Maurizio Giordano",
+ keywords = "Weightless neural network, WiSARD, Machine learning"
 }
 </pre>
 

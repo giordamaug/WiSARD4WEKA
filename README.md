@@ -88,6 +88,6 @@ and then run the classifier on your dataset:
 Some tests about WiSARD cross-validation on weka datasets:
 
 | method | pima-diabetes  | Glass | ionosphere |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- | ------------- |
 | WiSARD  | 0.825  | 0.56 | 0.91 |
 | SMO  | 0.911  | 0.27 | 0.81 |

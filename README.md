@@ -88,9 +88,9 @@ and then run the classifier on your dataset:
 Some measure of F-measure of WiSARD of classification on weka datasets (66\% split) in comparison with other methods:
 (NOTE: all methods run in default configuration of paramters)
 
-| method | pima-diabetes  | Glass | ionosphere | iris | labor-neg-data | soybean |
+| method | pima-diabetes  | Glass | ionosphere | iris | labor-neg-data | soybean | segment | supermarket | vote | weather
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| WiSARD | 0.825          | 0.564 | **0.914**      |  1.00 |     0.889      |  1.00   |  
-| SMO    | **0.852**          | 0.275 | 0.749       | 1.00 |     0.889      |  1.00   |
-| MLP    | 0.841          | 0.612 | 0.740       | 1.00 |     **0.923**      |  1.00   |
-| j48    | 0.824          | **0.667** | 0.729       | 1.00 |     0.769      |  0.696   |
+| WiSARD | 0.825          | 0.564 | **0.914**      |  1.000 |     0.889      |  1.000   |  0.986 | 0.779 | 0.989 | 1.0 |
+| SMO    | **0.852**          | 0.275 | 0.749       | 1.000 |     0.889      |  1.000   |  1.000 | 0.779 | 0.972 | 0.75 |
+| MLP    | 0.841          | 0.612 | 0.740       | 1.000 |     **0.923**      |  1.000   |  0.971 | 0.779 | 0.983 | 0.571 |
+| j48    | 0.824          | **0.667** | 0.729       | 1.000 |     0.769      |  0.696   | 0.986 | 0.779 | 0.972 | 0.571 |

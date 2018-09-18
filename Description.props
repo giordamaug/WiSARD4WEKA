@@ -29,7 +29,7 @@ License=GPL 3.0
 Description= A multi-class classification method based on the WiSARD weightless neural model.<br/><br/>A data-preprocessing filter allows to exploit WiSARD neural model training/classification capabilities on multi-attribute numeric data, whereas  WiSARD's  was historically restricted to binary pattern recognition.<br/><br/>For more information, see<br/><br/>De Gregorio M, Giordano, M. (2018). An experimental evaluation of weightless neural networks for multi-class classification. Applied Soft Computing. Vol.72.
 
 # Package URL for obtaining the package archive (required)
-PackageURL=http://prdownloads.sourceforge.net/weka/multiBoostAB1.0.1.zip?download
+PackageURL=https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
 
 # URL for further information
 #URL=http://weka.sourceforge.net/doc.packages/multiBoostAB

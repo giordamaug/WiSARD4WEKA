@@ -75,7 +75,7 @@ After package installation, you can run the WiSARD classifier from the Weka GUI:
 
 ![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka1.png)
 
-Once you select the WiSARd classifier, you can change its parameters:
+Once you select the WiSARD classifier, you can change its parameters:
 
 ![image](https://github.com/giordamaug/WiSARD4WEKA/blob/master/doc/wisard4weka2.png)
 

@@ -60,7 +60,7 @@ Or you can build locally the package to be imported in your Weka toolkit by mean
 ant -f build_package.xml -Dpackage=WiSARD  make_package
 </pre>
 
-# Install
+# Installation
 
 This repository includes a pre-build package (in zip format) of WiSARD4WEKA that you can 
 install from the the PackageManager of your Weka distribution:

@@ -90,7 +90,7 @@ and then run the classifier on your dataset:
 # Experiments
 
 Some measures of F-measure of WiSARD of classification on weka datasets (66\% split) in comparison with other methods:
-(NOTE: all methods run in default configuration of paramters)
+(NOTE: all methods run in default configurations of parameters)
 
 | method | pima-diabetes  | Glass | ionosphere | iris | labor-neg-data | soybean | segment | supermarket | vote | weather
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |------------- |------------- |------------- |------------- |

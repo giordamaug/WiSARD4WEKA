@@ -132,16 +132,16 @@ public class WiSARD extends AbstractClassifier
 
 	/** The training instances used for classification. */
 	private Instances origInstances;
-    private Instances trainingInstances;
-    /** Filter for converting nominal attributes to binary ones */
-    protected NominalToBinary m_NominalToBinary = null;
-    /** Filter for replacing missing values */
-    protected ReplaceMissingValues m_ReplaceMissingValues = null;
-    /** The number of attributes. */
-    protected int cardinality;
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    /** Array of discriminators. */
+	private Instances trainingInstances;
+	/** Filter for converting nominal attributes to binary ones */
+	protected NominalToBinary m_NominalToBinary = null;
+	/** Filter for replacing missing values */
+	protected ReplaceMissingValues m_ReplaceMissingValues = null;
+	/** The number of attributes. */
+	protected int cardinality;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	/** Array of discriminators. */
 	protected Discriminator[] darray;
 	/** Number of classes. */
 	private int m_NClasses;                       
@@ -179,25 +179,25 @@ public class WiSARD extends AbstractClassifier
 
 	
 	/**
-     * @return mapType [LINEAR | RANDOM].
-     */
+	 * @return mapType [LINEAR | RANDOM].
+	 */
 	public mapType getMapType() {
 		return m_MapType;
 	}
 
 	/**
-     * @param maptype is LINEAR if mapping is linear, otherwise it is RANDOM.
-     */
+	 * @param maptype is LINEAR if mapping is linear, otherwise it is RANDOM.
+	 */
 	public void setMapType(mapType maptype) {
 		m_MapType = maptype;
 	}
 
-    /**
-     * @return Tooltip text describing the mapType option
-     */
-    public String mapTypeTipText() {
-        return "Set this to change the mapping type to either linear or random (with seed) ";
-    }
+	/**
+	 * @return Tooltip text describing the mapType option
+	 */
+	public String mapTypeTipText() {
+	      return "Set this to change the mapping type to either linear or random (with seed) ";
+	}
     
 	/**
      * @return scaling range (number of tics).

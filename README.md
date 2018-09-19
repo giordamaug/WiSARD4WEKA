@@ -2,6 +2,12 @@
 A supervised classification model for WEKA based on the WiSARD weightless neural network
 for the Weka machine learning toolkit.
 
+> Authors: Maurizio Giordano and Massimo De Gregorio
+> - Istituto di Calcolo e Reti ad Alte Prestazioni (ICAR) - Consiglio Nazionale delle Ricerche (CNR) (Italy)
+> - Istituto di Scienze Applicate e Sistemi Intelligenti "Eduardo Caianiello" (ISASI) - Consiglio Nazionale delle Ricerche (CNR) (Italy)
+
+# Description
+
 WiSARD was originally conceived as a pattern recognition device mainly focusing on image processing domain.
 With ad hoc data transformation, WiSARD can also be used successfully as multiclass classifier in machine learning domain.
 

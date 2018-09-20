@@ -44,33 +44,33 @@ import weka.core.RevisionHandler;
  **/
 
 public class Ram implements Serializable, RevisionHandler {
-    /** The Constant serialVersionUID. */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	/** Array of memory cells (key-value pairs). */
 	protected Vector<Wentry> wentries = new Vector<Wentry>();     
 	/** RAM index. */
 	int index;                                                    
-	
+
 	/**
 	 * Getter function of RAM key-value pair content given an input key
 	 * @param key key to find the RAM key-value pair
 	 * @return the key-value pair of RAM found by by key
 	 */
 	public Wentry getEntry (long key) { 
-        Iterator<Wentry> it = (Iterator<Wentry>)this.wentries.iterator (); 
-        while (it.hasNext ()) { 
-            Wentry entry = (Wentry) it.next (); 
-            if (key == entry.getKey()) { 
-                return entry; 
-            } 
-        } 
-        return (Wentry)null; 
-    } 
-	
+		Iterator<Wentry> it = (Iterator<Wentry>)this.wentries.iterator (); 
+		while (it.hasNext ()) { 
+			Wentry entry = (Wentry) it.next (); 
+			if (key == entry.getKey()) { 
+				return entry; 
+			} 
+		} 
+		return (Wentry)null; 
+	} 
+
 	public void addKey(long key) {
 		wentries.add(new Wentry(key,1.0));
 	}
-	
+
 	/**
 	 * Updater function of RAM content given an input key. The RAM content is incremented by 1 at each access.
 	 * If the content was zero, the key-value pair is added to the RAM.
@@ -101,20 +101,20 @@ public class Ram implements Serializable, RevisionHandler {
 			return wentries.get(index).value;
 		}		
 	}
-	
+
 	/**
 	 * Print function of RAM contents
 	 * @return the printout (string) of RAM contents
 	 */
 	public String toString() {
 		String str = "{";
-		
+
 		Iterator<Wentry> it = this.wentries.iterator(); 
 		while (it.hasNext()) {
 			Wentry elem = it.next();
 			str += String.format ( "%d:%f ", elem.key, elem.value);
-        } 
-        return str +  "}\n";
+		} 
+		return str +  "}\n";
 	}
 	/**
 	 * Getter of revision

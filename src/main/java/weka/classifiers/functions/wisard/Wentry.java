@@ -41,62 +41,62 @@ import weka.core.RevisionHandler;
 
 public class Wentry implements Serializable, RevisionHandler {
 
-    /** The Constant serialVersionUID. */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Cell key (address). */
 	protected long key;                         
-    /** Cell value (content). */
+	/** Cell value (content). */
 	protected double value;						
 
-    /**
-     * RAM's memory cell constructor
-     * @param key key of cell
-     * @param value conent of cell
-     */
-    public Wentry(long key, double value) {
-        this.key = key;
-        this.value = value;
-    }
-    
-    
-    /**
-     * Getter of key of memory cell 
-     * @return the cell key
-     */
-    public long getKey() {
-        return key;
-    }
+	/**
+	 * RAM's memory cell constructor
+	 * @param key key of cell
+	 * @param value conent of cell
+	 */
+	public Wentry(long key, double value) {
+		this.key = key;
+		this.value = value;
+	}
 
-    /**
-     * Getter of content of memory cell 
-     * @return the cell content
-     */
-    public double getValue() {
-        return value;
-    }
 
-    /**
-     * Setter of content of memory cell 
-     * @param value the value to set in memory
-     */
-    public void setValue(double value) {
-    	this.value = value;
-    }
+	/**
+	 * Getter of key of memory cell 
+	 * @return the cell key
+	 */
+	public long getKey() {
+		return key;
+	}
 
-    /**
-     * Updater of content of memory cell 
-     * @param incr the value to add to the memory content
-     */
-    public void incrValue(double incr) {
-    	this.value += incr;
-    }
+	/**
+	 * Getter of content of memory cell 
+	 * @return the cell content
+	 */
+	public double getValue() {
+		return value;
+	}
+
+	/**
+	 * Setter of content of memory cell 
+	 * @param value the value to set in memory
+	 */
+	public void setValue(double value) {
+		this.value = value;
+	}
+
+	/**
+	 * Updater of content of memory cell 
+	 * @param incr the value to add to the memory content
+	 */
+	public void incrValue(double incr) {
+		this.value += incr;
+	}
 
 	/**
 	 * Getter of revision
 	 * @return the revision
 	 */
-    @Override
+	@Override
 	public String getRevision() {
 		// TODO Auto-generated method stub
 		return null;

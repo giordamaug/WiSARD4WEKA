@@ -30,8 +30,6 @@ import weka.classifiers.Classifier;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-// call as:
-// > java -cp /Users/maurizio/Work/WEKA-3-8-3/weka-3-8-3/weka.jar:dist/WiSARD-tests.jar:lib/weka-stable-3.8.3-tests.jar:lib/junit.jar:dist/WiSARD.jar weka.classifiers.functions.WiSARDTest
 /**
  * Tests WiSARD. Run from the command line with:<p>
  * java weka.classifiers.functions.WiSARDTest

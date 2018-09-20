@@ -18,10 +18,6 @@
  * *************************************************************************/
 
 
-/*
- * Copyright 2002 University of Waikato
- */
-
 package weka.classifiers.functions;
 
 import weka.classifiers.AbstractClassifierTest;

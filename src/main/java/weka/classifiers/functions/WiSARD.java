@@ -128,7 +128,7 @@ import weka.filters.unsupervised.attribute.ReplaceMissingValues;
  */
 
 public class WiSARD extends AbstractClassifier
-  implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
+implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 
 	/** The training instances used for classification. */
 	private Instances origInstances;
@@ -177,7 +177,7 @@ public class WiSARD extends AbstractClassifier
 	/** Bleaching enabling flag. */
 	private boolean m_BleachFlag = false;            
 
-	
+
 	/**
 	 * @return mapType [LINEAR | RANDOM].
 	 */
@@ -196,164 +196,164 @@ public class WiSARD extends AbstractClassifier
 	 * @return Tooltip text describing the mapType option
 	 */
 	public String mapTypeTipText() {
-	      return "Set this to change the mapping type to either linear or random (with seed) ";
+		return "Set this to change the mapping type to either linear or random (with seed) ";
 	}
-    
+
 	/**
-     * @return scaling range (number of tics).
-     */
+	 * @return scaling range (number of tics).
+	 */
 	public int getTicNo() {
 		return m_TicNo;
 	}
 
 	/**
-     * @param notics is the resolution in datum discretization.
-     */
+	 * @param notics is the resolution in datum discretization.
+	 */
 	public void setTicNo(int notics) {
 		m_TicNo = notics;
 	}
 
-    /**
-     * @return Tooltip text describing the ticNo option
-     */
-    public String ticNoTipText() {
-        return "Set the range of discrete values for datum";
-    }
+	/**
+	 * @return Tooltip text describing the ticNo option
+	 */
+	public String ticNoTipText() {
+		return "Set the range of discrete values for datum";
+	}
 
 	/**
-     * @return neuron resolution (number of bits).
-     */
-    public int getBitNo() {
+	 * @return neuron resolution (number of bits).
+	 */
+	public int getBitNo() {
 		return m_BitNo;
 	}
 
 	/**
-     * @param bitno is the neuron resolution in number of bits.
-     */
+	 * @param bitno is the neuron resolution in number of bits.
+	 */
 	public void setBitNo(int bitno) {
 		m_BitNo = bitno;
 	}
 
-    /**
-     * @return Tooltip text describing the bitNo option
-     */
-    public String bitNoTipText() {
-        return "Set the bit resolution of neurons";
-    }
+	/**
+	 * @return Tooltip text describing the bitNo option
+	 */
+	public String bitNoTipText() {
+		return "Set the bit resolution of neurons";
+	}
 
 	/**
-     * @return bleaching enabling flag.
-     */
-    public boolean getBleachFlag() {
+	 * @return bleaching enabling flag.
+	 */
+	public boolean getBleachFlag() {
 		return m_BleachFlag;
-    }
+	}
 
 	/**
-     * @param flag is True if bleaching is enblaed, False for disabling it.
-     */
+	 * @param flag is True if bleaching is enblaed, False for disabling it.
+	 */
 	public void setBleachFlag(boolean flag) {
 		this.m_BleachFlag = flag;
 	}
 
-    /**
-     * @return Tooltip text describing the bleachFlag option
-     */
-    public String bleachFlagTipText() {
-        return "Enable the bleaching algorithm";
-    }
+	/**
+	 * @return Tooltip text describing the bleachFlag option
+	 */
+	public String bleachFlagTipText() {
+		return "Enable the bleaching algorithm";
+	}
 
 	/**
-     * @return bleaching step parameter.
-     */
-    public double getBleachStep() {
+	 * @return bleaching step parameter.
+	 */
+	public double getBleachStep() {
 		return m_BleachStep;
 	}
 
 	/**
-     * @param step is the bleaching steping parameter.
-     */
+	 * @param step is the bleaching steping parameter.
+	 */
 	public void setBleachStep(double step) {
 		this.m_BleachStep = step;
 	}
 
-    /**
-     * @return Tooltip text describing the bleachFlag option
-     */
-    public String bleachStepTipText() {
-        return "Set the bleaching stepping";
-    }
+	/**
+	 * @return Tooltip text describing the bleachFlag option
+	 */
+	public String bleachStepTipText() {
+		return "Set the bleaching stepping";
+	}
 
 	/**
-     * @return bleaching confidence parameter.
-     */
-    public double getBleachConfidence() {
+	 * @return bleaching confidence parameter.
+	 */
+	public double getBleachConfidence() {
 		return m_BleachConfidence;
 	}
 
 	/**
-     * @param confidence is the bleaching confidence parameter.
-     */
+	 * @param confidence is the bleaching confidence parameter.
+	 */
 	public void setBleachConfidence(double confidence) {
 		this.m_BleachConfidence = confidence;
 	}
 
-    /**
-     * @return Tooltip text describing the bleachConfidence option
-     */
-    public String bleachConfidenceTipText() {
-        return "Set the bleaching confidence";
-    }
+	/**
+	 * @return Tooltip text describing the bleachConfidence option
+	 */
+	public String bleachConfidenceTipText() {
+		return "Set the bleaching confidence";
+	}
 
 	/**
-     * @return random mapping seed.
-     */
-    public long getSeed() {
+	 * @return random mapping seed.
+	 */
+	public long getSeed() {
 		return m_Seed;
 	}
 
 	/**
-     * @param seed is the seed for mapping randomization.
-     */
+	 * @param seed is the seed for mapping randomization.
+	 */
 	public void setSeed(long seed) {
 		this.m_Seed = seed;
 	}
-	
-    /**
-     * @return Tooltip text describing the bleachConfidence option
-     */
-    public String seedTipText() {
-        return "Set the seed for mapping randomization";
-    }
-    
-    /** 
-     * Setting capabilities of the Classifier
-     * @return capabilites of the classifier
-     */
-    public Capabilities getCapabilities() {
-    	Capabilities result = super.getCapabilities();
-    	result.disableAll();
-    	
-    	/**
-    	 * only numeric and nominal attributes are allowed
-    	 */
+
+	/**
+	 * @return Tooltip text describing the bleachConfidence option
+	 */
+	public String seedTipText() {
+		return "Set the seed for mapping randomization";
+	}
+
+	/** 
+	 * Setting capabilities of the Classifier
+	 * @return capabilites of the classifier
+	 */
+	public Capabilities getCapabilities() {
+		Capabilities result = super.getCapabilities();
+		result.disableAll();
+
+		/**
+		 * only numeric and nominal attributes are allowed
+		 */
 		result.enable(Capability.NOMINAL_ATTRIBUTES);
 		result.enable(Capability.NUMERIC_ATTRIBUTES);
 		result.enable(Capability.MISSING_VALUES);
 
-    	/**
-    	 *  only nominal classes are allowed
-    	 */
+		/**
+		 *  only nominal classes are allowed
+		 */
 		result.enable(Capability.NOMINAL_CLASS);
 		result.enable(Capability.MISSING_CLASS_VALUES);
 
-    	/**
-    	 * at least 1 instance has to be in the dataset
-    	 */
+		/**
+		 * at least 1 instance has to be in the dataset
+		 */
 		result.setMinimumNumberInstances(1);
 
-    	return result;
-    }
-	
+		return result;
+	}
+
 	/**
 	 * Returns a string describing this classifier
 	 * @return a description of the classifier suitable for
@@ -425,12 +425,12 @@ public class WiSARD extends AbstractClassifier
 		 */
 		m_onlyNumeric = true;
 		for (int i = 0; i < trainingInstances.numAttributes(); i++) {
-		    if (i != trainingInstances.classIndex()) {
-		      if (!trainingInstances.attribute(i).isNumeric()) {
-		    	  m_onlyNumeric = false;
-		          break;
-		      }
-		    }
+			if (i != trainingInstances.classIndex()) {
+				if (!trainingInstances.attribute(i).isNumeric()) {
+					m_onlyNumeric = false;
+					break;
+				}
+			}
 		}
 
 		if (!m_onlyNumeric) {
@@ -440,7 +440,7 @@ public class WiSARD extends AbstractClassifier
 			trainingInstances = Filter.useFilter(trainingInstances, m_NominalToBinary);
 		}
 		cardinality = trainingInstances.numAttributes();
-		
+
 		/** 
 		 * check where is the class attribute
 		 */
@@ -520,7 +520,7 @@ public class WiSARD extends AbstractClassifier
 		for (int c=0; c < m_NClasses; c++) {
 			this.darray[c] = new Discriminator(m_BitNo,m_TicNo * m_NFeatures,m_Classes[c],getMapType(), getSeed());
 		}
-        
+
 		/**
 		 * train the classifier
 		 */
@@ -529,414 +529,414 @@ public class WiSARD extends AbstractClassifier
 		}
 	}
 
-  /**
-   * Updates the classifier with the given instance.
-   *
-   * @param instance the new training instance to include in the model 
-   * @exception Exception if the instance could not be incorporated in
-   * the model.
-   */
-  @Override
-  public void updateClassifier(Instance instance) throws Exception {
-	// if datum has no classs... do nothing
-	if (instance.classIsMissing()) return;
-    
-    /**
-     *  copy only attributes (not the class) into the wisard input (mdata).
-     */
-    double[] data = instance.toDoubleArray();
-    double[] mdata = new double[m_NFeatures];
-    int idx = 0;
-    for (int i=0; i <= m_NFeatures; i++) {
-    	if (i == m_cIdx) continue;
-    	mdata[idx] = data[i];
-    	idx += 1;
-    }
-    /**
-     * train the wisard disciminators
-     */
-    this.darray[(int) data[instance.classIndex()]].trainHisto(mdata,this.ranges,this.mins,this.m_TicNo,this.m_NFeatures);
-  }
+	/**
+	 * Updates the classifier with the given instance.
+	 *
+	 * @param instance the new training instance to include in the model 
+	 * @exception Exception if the instance could not be incorporated in
+	 * the model.
+	 */
+	@Override
+	public void updateClassifier(Instance instance) throws Exception {
+		// if datum has no classs... do nothing
+		if (instance.classIsMissing()) return;
 
-  /**
-   * Classification routine.
-   *
-   * @param instance the instance to be classified
-   * @return predicted class probability distribution
-   * @exception Exception if there is a problem generating the prediction
-   */
-  @Override
-  public double[] distributionForInstance(Instance instance) throws Exception {
+		/**
+		 *  copy only attributes (not the class) into the wisard input (mdata).
+		 */
+		double[] data = instance.toDoubleArray();
+		double[] mdata = new double[m_NFeatures];
+		int idx = 0;
+		for (int i=0; i <= m_NFeatures; i++) {
+			if (i == m_cIdx) continue;
+			mdata[idx] = data[i];
+			idx += 1;
+		}
+		/**
+		 * train the wisard disciminators
+		 */
+		this.darray[(int) data[instance.classIndex()]].trainHisto(mdata,this.ranges,this.mins,this.m_TicNo,this.m_NFeatures);
+	}
 
-	  if (!origInstances.equalHeaders(instance.dataset())) throw new Exception(
-       	  "Incompatible instance types\n" + trainingInstances.equalHeadersMsg(instance.dataset()));
+	/**
+	 * Classification routine.
+	 *
+	 * @param instance the instance to be classified
+	 * @return predicted class probability distribution
+	 * @exception Exception if there is a problem generating the prediction
+	 */
+	@Override
+	public double[] distributionForInstance(Instance instance) throws Exception {
 
-	  if (trainingInstances.numInstances() == 0) {
-		  throw new Exception("No training instances!");
-	  }
-	  if (trainingInstances.numClasses() == 1) {
-		  if (getDebug()) System.out.println("Training data have only one class");
-		  // 100 percent likelihood of belonging to the one class
-		  return new double[]{1};
-	  }
-	  // trasform nominal to binary attributes (if required)
-	  if (!m_onlyNumeric) {
-		  m_NominalToBinary.input(instance);
-		  instance = m_NominalToBinary.output();
-	  }
-	  double[] dist = new double[m_NClasses];
-	  int pSum = 0;
+		if (!origInstances.equalHeaders(instance.dataset())) throw new Exception(
+				"Incompatible instance types\n" + trainingInstances.equalHeadersMsg(instance.dataset()));
 
-	  /**
-	   *  copy only attributes (not the class) into the wisard input (mdata).
-	   */
-	  double[] data = instance.toDoubleArray();
-	  double[] mdata = new double[m_NFeatures];
-	  int idx = 0;
-	  for (int i=0; i <= m_NFeatures; i++) {
-		  if (i == m_cIdx) continue;
-		  mdata[idx] = data[i];
-		  idx += 1;
-	  }
-	  /**
-	   *  get wisard predictions
-	   */
-	  if (this.m_BleachFlag)  {    // Bleaching is enabled
-		  double b = this.m_BleachStep;
-		  double confidence = 0.0;
-		  int n_rams = this.darray[0].getN_ram();
-		  for (int c=0; c < m_NClasses; c++) {      // calculate responses of each discriminator
-			  this.darray[c].responseHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
-		  }
-		  int[] result_partial = new int[m_NClasses];
-		  while (confidence < this.m_BleachConfidence) {
-			  pSum = 0;
-			  for (int c=0; c < m_NClasses; c++) {   
-				  result_partial[c] = 0;
-				  for (int neuron = 0; neuron < n_rams; neuron++) {
-					  if (this.darray[c].getResponse()[neuron] > b)
-						  result_partial[c]++;
-				  }
-				  pSum += result_partial[c];
-			  }
-			  confidence = calc_confidence(result_partial);
-			  if (confidence < 0)
-				  throw new Exception("Something wrong in Bleaching algorithm!");
-			  b += 1.0;
-			  if (pSum == 0) {
-				  pSum = 0;
-				  for (int c=0; c < m_NClasses; c++) {   
-					  result_partial[c] = 0;
-					  for (int neuron = 0; neuron < n_rams; neuron++) {
-						  if (this.darray[c].getResponse()[neuron] >= 1.0)
-							  result_partial[c]++;
-					  }
-					  pSum += result_partial[c];
-				  }
-				  break;
-			  }
-		  }
-		  if (pSum == 0) {
-			  for (int c=0; c < m_NClasses; c++) {
-				  dist[c] = 0.0;
-				  for (int neuron = 0; neuron < n_rams; neuron++)
-					  dist[c] += this.darray[c].getResponse()[neuron];
-				  dist[c] = dist[c] / (double) n_rams;
-			  }
-		  } else
-			  for (int c=0; c < m_NClasses; c++)  
-				  dist[c] = result_partial[c] / (double) pSum;
-	  }
-	  else                        // No Bleaching!
-		  for (int c=0; c < m_NClasses; c++) {
-			  dist[c] = this.darray[c].classifyHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
-			  // wisard prediction are normalize to get a distribution.
-		  }
-	  return dist;
+		if (trainingInstances.numInstances() == 0) {
+			throw new Exception("No training instances!");
+		}
+		if (trainingInstances.numClasses() == 1) {
+			if (getDebug()) System.out.println("Training data have only one class");
+			// 100 percent likelihood of belonging to the one class
+			return new double[]{1};
+		}
+		// trasform nominal to binary attributes (if required)
+		if (!m_onlyNumeric) {
+			m_NominalToBinary.input(instance);
+			instance = m_NominalToBinary.output();
+		}
+		double[] dist = new double[m_NClasses];
+		int pSum = 0;
 
-  }
+		/**
+		 *  copy only attributes (not the class) into the wisard input (mdata).
+		 */
+		double[] data = instance.toDoubleArray();
+		double[] mdata = new double[m_NFeatures];
+		int idx = 0;
+		for (int i=0; i <= m_NFeatures; i++) {
+			if (i == m_cIdx) continue;
+			mdata[idx] = data[i];
+			idx += 1;
+		}
+		/**
+		 *  get wisard predictions
+		 */
+		if (this.m_BleachFlag)  {    // Bleaching is enabled
+			double b = this.m_BleachStep;
+			double confidence = 0.0;
+			int n_rams = this.darray[0].getN_ram();
+			for (int c=0; c < m_NClasses; c++) {      // calculate responses of each discriminator
+				this.darray[c].responseHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
+			}
+			int[] result_partial = new int[m_NClasses];
+			while (confidence < this.m_BleachConfidence) {
+				pSum = 0;
+				for (int c=0; c < m_NClasses; c++) {   
+					result_partial[c] = 0;
+					for (int neuron = 0; neuron < n_rams; neuron++) {
+						if (this.darray[c].getResponse()[neuron] > b)
+							result_partial[c]++;
+					}
+					pSum += result_partial[c];
+				}
+				confidence = calc_confidence(result_partial);
+				if (confidence < 0)
+					throw new Exception("Something wrong in Bleaching algorithm!");
+				b += 1.0;
+				if (pSum == 0) {
+					pSum = 0;
+					for (int c=0; c < m_NClasses; c++) {   
+						result_partial[c] = 0;
+						for (int neuron = 0; neuron < n_rams; neuron++) {
+							if (this.darray[c].getResponse()[neuron] >= 1.0)
+								result_partial[c]++;
+						}
+						pSum += result_partial[c];
+					}
+					break;
+				}
+			}
+			if (pSum == 0) {
+				for (int c=0; c < m_NClasses; c++) {
+					dist[c] = 0.0;
+					for (int neuron = 0; neuron < n_rams; neuron++)
+						dist[c] += this.darray[c].getResponse()[neuron];
+					dist[c] = dist[c] / (double) n_rams;
+				}
+			} else
+				for (int c=0; c < m_NClasses; c++)  
+					dist[c] = result_partial[c] / (double) pSum;
+		}
+		else                        // No Bleaching!
+			for (int c=0; c < m_NClasses; c++) {
+				dist[c] = this.darray[c].classifyHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
+				// wisard prediction are normalize to get a distribution.
+			}
+		return dist;
 
-  /**
-   * Classifies the given test instance. The instance has to belong to a
-   * dataset when it's being classified. Note that a classifier MUST
-   * implement either this or distributionForInstance().
-   *
-   * @param instance the instance to be classified
-   * @return the predicted most likely class for the instance or 
-   * Instance.missingValue() if no prediction is made
-   * @exception Exception if an error occurred during the prediction
-   */
-  public double classifyInstance(Instance instance) throws Exception {
+	}
+
+	/**
+	 * Classifies the given test instance. The instance has to belong to a
+	 * dataset when it's being classified. Note that a classifier MUST
+	 * implement either this or distributionForInstance().
+	 *
+	 * @param instance the instance to be classified
+	 * @return the predicted most likely class for the instance or 
+	 * Instance.missingValue() if no prediction is made
+	 * @exception Exception if an error occurred during the prediction
+	 */
+	public double classifyInstance(Instance instance) throws Exception {
 
 		double[] dist = distributionForInstance(instance);
 		if (dist == null) {
 			throw new Exception("Null distribution predicted");
 		}
 		switch (instance.classAttribute().type()) {
-			case Attribute.NOMINAL:
-				double max = 0;
-				int maxIndex = 0;
-	
-				for (int i = 0; i < dist.length; i++) {
-					if (dist[i] > max) {
-						maxIndex = i;
-						max = dist[i];
-					}
+		case Attribute.NOMINAL:
+			double max = 0;
+			int maxIndex = 0;
+
+			for (int i = 0; i < dist.length; i++) {
+				if (dist[i] > max) {
+					maxIndex = i;
+					max = dist[i];
 				}
-				if (max > 0) {
-					return maxIndex;
-				} else {
-					// throw new Exception("Predicted missing value.");
-					return 0;
-				}
-			case Attribute.NUMERIC:
-				throw new Exception("Numeric class not supported in WisardClassifier!");
-			default:
+			}
+			if (max > 0) {
+				return maxIndex;
+			} else {
 				// throw new Exception("Predicted missing value.");
 				return 0;
+			}
+		case Attribute.NUMERIC:
+			throw new Exception("Numeric class not supported in WisardClassifier!");
+		default:
+			// throw new Exception("Predicted missing value.");
+			return 0;
 		}
 	}
 
-  /**
-   * Returns an enumeration describing the available options.
-   *
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-	  Enumeration   	en;
-	  Vector result;
-	  
-	  result = new Vector();
+	/**
+	 * Returns an enumeration describing the available options.
+	 *
+	 * @return an enumeration of all the available options.
+	 */
+	@Override
+	public Enumeration<Option> listOptions() {
+		Enumeration   	en;
+		Vector result;
 
-	  result.add(new Option("\tSet bit resolution\n","B", 16,"-B <bitno>"));
-	  result.addElement(new Option("\tSet scaling range\n","S", 128,"-S <ticno>"));
-	  result.addElement(new Option("\tSet mapping type [linear, random]\n", "M <maptype>", mapType.RANDOM.ordinal(),"-M"));
-	  result.addElement(new Option("\tSet mapping seed\n", "m", -1,"-m <seed>"));
-	  result.addElement(new Option("\tEnable Bleaching\n", "F", 0,"-F"));
-	  result.addElement(new Option("\tSet Bleaching step\n", "s", 1,"-s <step>"));
-	  result.addElement(new Option("\tSet Bleaching confidence\n", "c", 1,"-c <confidence>"));
-	  
-	  en = super.listOptions();
-	  while (en.hasMoreElements())
-		  result.addElement(en.nextElement());
-	  
-	  return result.elements();
-  }
+		result = new Vector();
 
-  /**
-   * Gets the options of super.
-   *
-   * @return Vector of all Options given in parent object(s).
-   */
-  private Vector<Option> getOptionsOfSuper() {
-      Vector<Option> v = new Vector<Option>();
-      // super will always return Enumeration<Option>
-      Enumeration<Option> e = super.listOptions();
-      while (e.hasMoreElements()) {
-          Option option = e.nextElement();
-          v.add(option);
-      }
-      return v;
-  }
+		result.add(new Option("\tSet bit resolution\n","B", 16,"-B <bitno>"));
+		result.addElement(new Option("\tSet scaling range\n","S", 128,"-S <ticno>"));
+		result.addElement(new Option("\tSet mapping type [linear, random]\n", "M <maptype>", mapType.RANDOM.ordinal(),"-M"));
+		result.addElement(new Option("\tSet mapping seed\n", "m", -1,"-m <seed>"));
+		result.addElement(new Option("\tEnable Bleaching\n", "F", 0,"-F"));
+		result.addElement(new Option("\tSet Bleaching step\n", "s", 1,"-s <step>"));
+		result.addElement(new Option("\tSet Bleaching confidence\n", "c", 1,"-c <confidence>"));
 
-  /**
-   * <!-- options-start --> * Valid options are: <p> * *
-   * 
-   * <pre>
-   * -B &lt;bitno&gt;
-   * * The bit resolution. The value is an integer between 1 and 32.
-   * </pre>
-   * 
-   * <pre>
-   * -S &lt;ticno&gt;
-   * * The scaling range. The value is an integer in the range 1-8192.
-   * </pre>
-   * 
-   * <pre>
-   * -M &lt;LINEAR | RANDOM&gt;
-   * * The mapping type. The options are LINEAR or RANDOM (with seed).
-   * </pre>
-   * 
-   * <pre>
-   * -F
-   * Ture to enable bleaching algorithm (tie resolution). False for disabling it.
-   * </pre>
-   * 
-   * <pre>
-   * -m &lt;seed&gt;
-   * * Seed for random mapping. Can be -1 (no seed) of a valid noninteger seed.
-   * </pre>
-   * 
-   * <pre>
-   * -s &lt;step&gt;
-   * Set bleaching step [nonegative real]
-   * </pre>
-   * 
-   * <pre>
-   * -c &lt;confidence&gt;
-   * Set bleaching confidence [real in 0,1]
-   * </pre>
-   *
-   * * <!-- options-end -->
-   * @param options {@inheritDoc}
-   */
-  @Override
-  public void setOptions(String[] options) {
-      try {
-    	  String optionString;
-    	  // parse flag option
-          if (Utils.getFlag('F', options)) setBleachFlag(true);
-          else 
-        	  setBleachFlag(false);
-    	  /**
-    	   *  parse integer options
-    	   */
-          optionString = Utils.getOption('B', options);
-          if (optionString.length() != 0) 
-        	  setBitNo(Integer.parseInt(optionString));
-          else
-        	  setBitNo(8);
-          optionString = Utils.getOption('S', options);
-          if (optionString.length() != 0) 
-        	  setTicNo(Integer.parseInt(optionString));    
-          else
-        	  setTicNo(256);
-          optionString = Utils.getOption('m', options);
-          if (optionString.length() != 0) 
-        	  setSeed(Integer.parseInt(optionString));
-          else
-        	  setSeed(-1);
-    	  /**
-    	   *  parse float options
-    	   */
-          optionString = Utils.getOption('s', options);
-          if (optionString.length() != 0) 
-        	  setBleachStep(Double.parseDouble(optionString));
-          else
-        	  setBleachStep(1.0);
-          optionString = Utils.getOption('c', options);
-          if (optionString.length() != 0) 
-        	  setBleachConfidence(Double.parseDouble(optionString));
-          else
-        	  setBleachConfidence(0.01);
-    	  /**
-    	   *  parse string (enum) options
-    	   */
-          optionString = Utils.getOption('M', options);
-          if (optionString.length() != 0) 
-        	  setMapType(mapType.valueOf(optionString));
-          else
-        	  setMapType(mapType.RANDOM);
-          
-          Utils.checkForRemainingOptions(options);
-          
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
+		en = super.listOptions();
+		while (en.hasMoreElements())
+			result.addElement(en.nextElement());
 
-  }
-  
+		return result.elements();
+	}
 
-  /**
+	/**
+	 * Gets the options of super.
+	 *
+	 * @return Vector of all Options given in parent object(s).
+	 */
+	private Vector<Option> getOptionsOfSuper() {
+		Vector<Option> v = new Vector<Option>();
+		// super will always return Enumeration<Option>
+		Enumeration<Option> e = super.listOptions();
+		while (e.hasMoreElements()) {
+			Option option = e.nextElement();
+			v.add(option);
+		}
+		return v;
+	}
+
+	/**
+	 * <!-- options-start --> * Valid options are: <p> * *
+	 * 
+	 * <pre>
+	 * -B &lt;bitno&gt;
+	 * * The bit resolution. The value is an integer between 1 and 32.
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -S &lt;ticno&gt;
+	 * * The scaling range. The value is an integer in the range 1-8192.
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -M &lt;LINEAR | RANDOM&gt;
+	 * * The mapping type. The options are LINEAR or RANDOM (with seed).
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -F
+	 * Ture to enable bleaching algorithm (tie resolution). False for disabling it.
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -m &lt;seed&gt;
+	 * * Seed for random mapping. Can be -1 (no seed) of a valid noninteger seed.
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -s &lt;step&gt;
+	 * Set bleaching step [nonegative real]
+	 * </pre>
+	 * 
+	 * <pre>
+	 * -c &lt;confidence&gt;
+	 * Set bleaching confidence [real in 0,1]
+	 * </pre>
+	 *
+	 * * <!-- options-end -->
+	 * @param options {@inheritDoc}
+	 */
+	@Override
+	public void setOptions(String[] options) {
+		try {
+			String optionString;
+			// parse flag option
+			if (Utils.getFlag('F', options)) setBleachFlag(true);
+			else 
+				setBleachFlag(false);
+			/**
+			 *  parse integer options
+			 */
+			optionString = Utils.getOption('B', options);
+			if (optionString.length() != 0) 
+				setBitNo(Integer.parseInt(optionString));
+			else
+				setBitNo(8);
+			optionString = Utils.getOption('S', options);
+			if (optionString.length() != 0) 
+				setTicNo(Integer.parseInt(optionString));    
+			else
+				setTicNo(256);
+			optionString = Utils.getOption('m', options);
+			if (optionString.length() != 0) 
+				setSeed(Integer.parseInt(optionString));
+			else
+				setSeed(-1);
+			/**
+			 *  parse float options
+			 */
+			optionString = Utils.getOption('s', options);
+			if (optionString.length() != 0) 
+				setBleachStep(Double.parseDouble(optionString));
+			else
+				setBleachStep(1.0);
+			optionString = Utils.getOption('c', options);
+			if (optionString.length() != 0) 
+				setBleachConfidence(Double.parseDouble(optionString));
+			else
+				setBleachConfidence(0.01);
+			/**
+			 *  parse string (enum) options
+			 */
+			optionString = Utils.getOption('M', options);
+			if (optionString.length() != 0) 
+				setMapType(mapType.valueOf(optionString));
+			else
+				setMapType(mapType.RANDOM);
+
+			Utils.checkForRemainingOptions(options);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+	/**
 	 * Get the options of the current setup.
 	 * @return		the current options
-   */
-  @Override
-  public String[] getOptions() {
-	  int i;
-	  String[] options;
-	  Vector<String>    	result = new Vector<>();
-	  
-	  if (getBleachFlag()) result.add("-F"); 
-	  result.add("-B"); result.add(String.format("%d",getBitNo()));
-	  result.add("-S"); result.add(String.format("%d",getTicNo()));
-	  result.add("-M"); result.add(String.format("%s",getMapType().name()));
-	  result.add("-m"); result.add(String.format("%d", getSeed()));
-	  result.add("-s"); result.add(String.format(Locale.US,"%.3f",getBleachStep()));
-	  result.add("-c"); result.add(String.format(Locale.US,"%.3f",getBleachConfidence()));
-	  
-	  options = super.getOptions();
-	  for (i = 0; i < options.length; i++)
+	 */
+	@Override
+	public String[] getOptions() {
+		int i;
+		String[] options;
+		Vector<String>    	result = new Vector<>();
+
+		if (getBleachFlag()) result.add("-F"); 
+		result.add("-B"); result.add(String.format("%d",getBitNo()));
+		result.add("-S"); result.add(String.format("%d",getTicNo()));
+		result.add("-M"); result.add(String.format("%s",getMapType().name()));
+		result.add("-m"); result.add(String.format("%d", getSeed()));
+		result.add("-s"); result.add(String.format(Locale.US,"%.3f",getBleachStep()));
+		result.add("-c"); result.add(String.format(Locale.US,"%.3f",getBleachConfidence()));
+
+		options = super.getOptions();
+		for (i = 0; i < options.length; i++)
 			result.add(options[i]);
-    
-	  return result.toArray(new String[result.size()]);
-  }
 
-  /**
-   * Returns a description of the classifier.
-   *
-   * @return a description of the classifier as a string.
-   */
-  @Override
-  public String toString() {
-	  StringBuilder sb = new StringBuilder();
-      sb.append("WiSARD Classifier (2018 Maurizio Giordano)\n");
-      sb.append("bits: ").append(getBitNo());
-      sb.append("\n");
-      sb.append("tics: ").append(getTicNo());
-      sb.append("\n");
-      if (trainingInstances != null) {
-          sb.append("Training instances: ").append(trainingInstances.size());
-          sb.append("\n");
-      }
-      return sb.toString();
-  }
-  
+		return result.toArray(new String[result.size()]);
+	}
+
+	/**
+	 * Returns a description of the classifier.
+	 *
+	 * @return a description of the classifier as a string.
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("WiSARD Classifier (2018 Maurizio Giordano)\n");
+		sb.append("bits: ").append(getBitNo());
+		sb.append("\n");
+		sb.append("tics: ").append(getTicNo());
+		sb.append("\n");
+		if (trainingInstances != null) {
+			sb.append("Training instances: ").append(trainingInstances.size());
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 
 
- 
-  /**
-   * Get revision number
-   * @return revision number
-   */
-  @Override
-  public String getRevision() {
-  	// TODO Auto-generated method stub
-  	return RevisionUtils.extract("$Revision: 2.0 $");
-  }
- 
-  /**
-   * Main method for testing this class.
-   *
-   * @param argv the options
-   */
-  public static void main(String [] argv) {
-	    runClassifier(new WiSARD(), argv);
-  }
 
-  /** 
-   * Bleaching confidence update function
-   * @param results
-   * @return confidence
-   */
-  private double calc_confidence(int[] results) {
-	  // find the max (and the second max)
-	  int first, second, firstIndex=0;
 
-	  first = second = Integer.MIN_VALUE;
-	  for (int i = 1; i < results.length; i++) {
-		  if (results[i] > first) { /* If current element is smaller than first then update both first and second */
-			  second = first;
-			  first = results[i];
-			  firstIndex = i;
-		  } else if (results[i] > second && results[i] != first)   /* If element in between first and 
+	/**
+	 * Get revision number
+	 * @return revision number
+	 */
+	@Override
+	public String getRevision() {
+		// TODO Auto-generated method stub
+		return RevisionUtils.extract("$Revision: 2.0 $");
+	}
+
+	/**
+	 * Main method for testing this class.
+	 *
+	 * @param argv the options
+	 */
+	public static void main(String [] argv) {
+		runClassifier(new WiSARD(), argv);
+	}
+
+	/** 
+	 * Bleaching confidence update function
+	 * @param results
+	 * @return confidence
+	 */
+	private double calc_confidence(int[] results) {
+		// find the max (and the second max)
+		int first, second, firstIndex=0;
+
+		first = second = Integer.MIN_VALUE;
+		for (int i = 1; i < results.length; i++) {
+			if (results[i] > first) { /* If current element is smaller than first then update both first and second */
+				second = first;
+				first = results[i];
+				firstIndex = i;
+			} else if (results[i] > second && results[i] != first)   /* If element in between first and 
 	            second then update second  */
-			  second = results[i];
-	  }
-	  // if max is zero, confidence is zero
-	  if (first == 0) return 0;
-	  // check if there are 2 or more max
-	  for (int i = 0; i < results.length; i++)
-		  if (results[i] == first && i != firstIndex)
-			  return 0;   // with two max confidence is zero
+				second = results[i];
+		}
+		// if max is zero, confidence is zero
+		if (first == 0) return 0;
+		// check if there are 2 or more max
+		for (int i = 0; i < results.length; i++)
+			if (results[i] == first && i != firstIndex)
+				return 0;   // with two max confidence is zero
 
-	  if (second == Integer.MIN_VALUE)
-		  return -1;
-	  else
-		  return (1 - second / first);
+		if (second == Integer.MIN_VALUE)
+			return -1;
+		else
+			return (1 - second / first);
 
-  }
+	}
 
 }
 

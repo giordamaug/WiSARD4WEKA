@@ -621,7 +621,7 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 				}
 				confidence = calc_confidence(result_partial);
 				if (confidence < 0)
-					throw new Exception("Something wrong in Bleaching algorithm!");
+					throw new WisardException("Something wrong in Bleaching algorithm!");
 				b += 1.0;
 				if (pSum == 0) {
 					pSum = 0;

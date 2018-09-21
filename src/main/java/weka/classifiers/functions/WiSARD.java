@@ -500,18 +500,19 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 			throw new IllegalArgumentException(
 					"Scaling range must be in [1..8192]!");
 		}
-		if (m_BleachStep < 0) {
-			throw new IllegalArgumentException(
-					"Bleaching step must be non negative !");
-		}
 		if (m_Seed < -1) {
 			throw new IllegalArgumentException(
 					"Mapping seed can be -1 (no seed) or a nonnegative (valid) seed !");
 		}
+		/** 
+		if (m_BleachStep < 0) {
+			throw new IllegalArgumentException(
+					"Bleaching step must be non negative !");
+		}
 		if (m_BleachConfidence <= 0 || m_BleachConfidence >= 1) {
 			throw new IllegalArgumentException(
 					"Bleaching confidence must be in range 0,1 !");
-		}
+		} **/
 
 		/**
 		 *  create discriminator array

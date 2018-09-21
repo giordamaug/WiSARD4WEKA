@@ -59,7 +59,7 @@ import weka.core.RevisionHandler;
  **/
 
 public class Discriminator implements Serializable, RevisionHandler {
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -83,379 +83,380 @@ public class Discriminator implements Serializable, RevisionHandler {
 	private int[] map;           						        
 	/** pointer to the inverse retina (mapping) */
 	private int[] rmap;          						        
-    /** pointer to mental image */ 
+	/** pointer to mental image */ 
 	private double[] mi;        							    
-    /** max mental image value */
+	/** max mental image value */
 	private double maxmi;      									
-    /** response list */
+	/** response list */
 	private double[] response;       							
-    /** the name of the discriminator */
+	/** the name of the discriminator */
 	private String name;         								
-    /** the mapping type */
+	/** the mapping type */
 	private mapType maptype;									
-    
-    
-    long mypowers[] = new long[] { 1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L, 256L, 512L, 1024L, 2048L, 4096L, 8192L, 16384L, 32768L, 65536L, 131072L , 262144L, 524288L,
-    	    1048576L, 2097152L, 4194304L, 8388608L, 16777216L, 33554432L, 67108864L, 134217728L, 268435456L, 536870912L, 1073741824L, 2147483648L,
-    	    4294967296L, 8589934592L, 17179869184L, 34359738368L, 68719476736L, 137438953472L, 274877906944L, 549755813888L, 1099511627776L, 2199023255552L, 
-    	    4398046511104L, 8796093022208L, 17592186044416L, 35184372088832L, 70368744177664L, 140737488355328L, 281474976710656L, 562949953421312L, 1125899906842624L, 
-    	    2251799813685248L, 4503599627370496L, 9007199254740992L, 18014398509481984L, 36028797018963968L, 72057594037927936L, 144115188075855872L, 288230376151711744L, 
-    	    576460752303423488L, 1152921504606846976L, 2305843009213693952L, 4611686018427387904L, 
-    	    //9223372036854775808L
-    	   };
-    
-    class mapPair{
-    	 public int[] map1;
-    	 public int[] map2;
-    }
-    
-    static void shuffleArray(int[] ar, long seed)
-    {
-      // If running on Java 6 or older, use `new Random()` on RHS here
-      Random rnd;
-      if (seed >= 0)  rnd = new Random(seed);
-      else  rnd = new Random();
-      for (int i = ar.length - 1; i > 0; i--)
-      {
-        int index = rnd.nextInt(i + 1);
-        // Simple swap
-        int a = ar[index];
-        ar[index] = ar[i];
-        ar[i] = a;
-      }
-    }
-    
-    protected mapPair mapping() throws WisardException {
-        int i;
-        mapPair maps = new mapPair();
-        maps.map1 = new int[this.size];
-        maps.map2 = new int[this.size];
 
-        int[] list = new int[this.size];
-        int[] rlist = new int[this.size];
-        for (i = 0; i < this.size; i++) {
-            list[i] = i;
-            rlist[i] = i;
-        }      
-        if (this.maptype == mapType.RANDOM) {
-        	shuffleArray(list, this.seed);
-        	for (i = 0; i < this.size; i++) rlist[list[i]] = i;
-            maps.map1 = list;
-            maps.map2 = rlist;
-        } else if (this.maptype == mapType.LINEAR) {
-            maps.map1 = list;
-            maps.map2 = rlist;
-        } else {
-        	throw new WisardException( "received wrong mapping mode" );
-        }
-        return maps;        
-    }
 
-    protected void init() {
-    	n_bit = 16;
-    	n_loc = mypowers[n_bit];
-    	tcounter = (long) 0;
-    	maxmi = (double) 0;
-    	name = "Anonym";
-    	maptype = mapType.RANDOM;
-    }
+	long mypowers[] = new long[] { 1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L, 256L, 512L, 1024L, 2048L, 4096L, 8192L, 16384L, 32768L, 65536L, 131072L , 262144L, 524288L,
+			1048576L, 2097152L, 4194304L, 8388608L, 16777216L, 33554432L, 67108864L, 134217728L, 268435456L, 536870912L, 1073741824L, 2147483648L,
+			4294967296L, 8589934592L, 17179869184L, 34359738368L, 68719476736L, 137438953472L, 274877906944L, 549755813888L, 1099511627776L, 2199023255552L, 
+			4398046511104L, 8796093022208L, 17592186044416L, 35184372088832L, 70368744177664L, 140737488355328L, 281474976710656L, 562949953421312L, 1125899906842624L, 
+			2251799813685248L, 4503599627370496L, 9007199254740992L, 18014398509481984L, 36028797018963968L, 72057594037927936L, 144115188075855872L, 288230376151711744L, 
+			576460752303423488L, 1152921504606846976L, 2305843009213693952L, 4611686018427387904L, 
+			//9223372036854775808L
+	};
 
-    protected void fininit() {
-    	this.mi = new double[this.size];
-    	int neuron;
-    	if (this.size % n_bit == 0) {
-    		this.n_ram = (int)(this.size / n_bit);
-    	} else {
-    		this.n_ram = (int)(this.size / n_bit) + 1;
-    	}
-    	this.rams = new Ram[this.n_ram];
-    	this.response = new double[this.n_ram];
-    	this.maxkeys = new Wentry[this.n_ram];
-    	for (neuron = 0; neuron < this.n_ram; neuron++) {
-    		this.rams[neuron] = new Ram();
-    		this.maxkeys[neuron] = new Wentry((long) 0, -1.0);
-    	}
-    }
+	class mapPair{
+		public int[] map1;
+		public int[] map2;
+	}
 
-    protected void computeMaps() throws WisardException {
-    	mapPair maps = mapping();
-    	this.map = maps.map1;
-    	this.rmap = maps.map2;
-    }
+	static void shuffleArray(int[] ar, long seed)
+	{
+		// If running on Java 6 or older, use `new Random()` on RHS here
+		Random rnd;
+		if (seed >= 0)  rnd = new Random(seed);
+		else  rnd = new Random();
+		for (int i = ar.length - 1; i > 0; i--)
+		{
+			int index = rnd.nextInt(i + 1);
+			// Simple swap
+			int a = ar[index];
+			ar[index] = ar[i];
+			ar[i] = a;
+		}
+	}
 
-    /**
-     * Discriminator constructor
-     * @param n_bit number of bits for keys of RAMs
-     * @param size the input binary input size
-     * @param name of discriminator
-     * @param mt the mapping type (the options are LINEAR or RANDOM)
-     * @param seed seed random mapping. Can be -1 (no seed) of a valid noninteger seed.
-     * @throws WisardException error in construction
-     */
-    public Discriminator(int n_bit, int size, String name, mapType mt, long seed) throws WisardException {
-        init(); 
-        if (n_bit > 32) throw new WisardException("Up to 32 bit supported!");
-        this.n_bit = n_bit;
-        this.n_loc = mypowers[n_bit];
-        this.size = size;
-        this.name = name;
-        this.maptype = mt;
-        this.seed = seed;
-        fininit();
-        computeMaps();
-    }
+	protected mapPair mapping() throws WisardException {
+		int i;
+		mapPair maps = new mapPair();
+		maps.map1 = new int[this.size];
+		maps.map2 = new int[this.size];
 
-    /**
-     * Discriminator constructor
-     * @param size the input binary input size
-     * @param name of discriminator
-     * @param mt the mapping type (the options are LINEAR or RANDOM)
-     * @throws WisardException error in construction
-     */
-    public Discriminator(int size, String name, mapType mt) throws WisardException {
-        init();    	
-        this.size = size;
-        this.name = name;
-        this.maptype = mt;
-        fininit();
-        computeMaps();
-    }
-    
-    /**
-     * Discriminator constructor
-     * @param size the input binary input size
-     * @param name of discriminator
-     * @throws WisardException error in construction
-     */
-    public Discriminator(int size, String name) throws WisardException {
-        init();    	
-        this.size = size;
-        this.name = name;
-        fininit();
-        computeMaps();
-    }
-    /**
-     * Discriminator constructor
-     * @param size the input binary input size
-     * @throws WisardException error in construction
-     */
-    public Discriminator(int size) throws WisardException {
-        init();    	
-        this.size = size;
-        fininit();
-        computeMaps();
-    }
-    
-    /**
-     * Check if the input is a legal tuple for the discriminator.
-     * @param tuple the input tuple of keys
-     * @return true if the input is a legal tuple for the discriminator
-     */
-    public Boolean checkTuple(long[] tuple) {
-        if (tuple.length != this.n_ram) {
-        	return false;
-        }
-        for (int i=0; i < tuple.length; i++) {
+		int[] list = new int[this.size];
+		int[] rlist = new int[this.size];
+		for (i = 0; i < this.size; i++) {
+			list[i] = i;
+			rlist[i] = i;
+		}      
+		if (this.maptype == mapType.RANDOM) {
+			shuffleArray(list, this.seed);
+			for (i = 0; i < this.size; i++) rlist[list[i]] = i;
+			maps.map1 = list;
+			maps.map2 = rlist;
+		} else if (this.maptype == mapType.LINEAR) {
+			maps.map1 = list;
+			maps.map2 = rlist;
+		} else {
+			throw new WisardException( "received wrong mapping mode" );
+		}
+		return maps;        
+	}
+
+	protected void init() {
+		n_bit = 16;
+		n_loc = mypowers[n_bit];
+		tcounter = (long) 0;
+		maxmi = (double) 0;
+		name = "Anonym";
+		maptype = mapType.RANDOM;
+	}
+
+	protected void fininit() {
+		this.mi = new double[this.size];
+		int neuron;
+		if (this.size % n_bit == 0) {
+			this.n_ram = (int)(this.size / n_bit);
+		} else {
+			this.n_ram = (int)(this.size / n_bit) + 1;
+		}
+		this.rams = new Ram[this.n_ram];
+		this.response = new double[this.n_ram];
+		this.maxkeys = new Wentry[this.n_ram];
+		for (neuron = 0; neuron < this.n_ram; neuron++) {
+			this.response[neuron] = 0.0;
+			this.rams[neuron] = new Ram();
+			this.maxkeys[neuron] = new Wentry((long) 0, -1.0);
+		}
+	}
+
+	protected void computeMaps() throws WisardException {
+		mapPair maps = mapping();
+		this.map = maps.map1;
+		this.rmap = maps.map2;
+	}
+
+	/**
+	 * Discriminator constructor
+	 * @param n_bit number of bits for keys of RAMs
+	 * @param size the input binary input size
+	 * @param name of discriminator
+	 * @param mt the mapping type (the options are LINEAR or RANDOM)
+	 * @param seed seed random mapping. Can be -1 (no seed) of a valid noninteger seed.
+	 * @throws WisardException error in construction
+	 */
+	public Discriminator(int n_bit, int size, String name, mapType mt, long seed) throws WisardException {
+		init(); 
+		if (n_bit > 32) throw new WisardException("Up to 32 bit supported!");
+		this.n_bit = n_bit;
+		this.n_loc = mypowers[n_bit];
+		this.size = size;
+		this.name = name;
+		this.maptype = mt;
+		this.seed = seed;
+		fininit();
+		computeMaps();
+	}
+
+	/**
+	 * Discriminator constructor
+	 * @param size the input binary input size
+	 * @param name of discriminator
+	 * @param mt the mapping type (the options are LINEAR or RANDOM)
+	 * @throws WisardException error in construction
+	 */
+	public Discriminator(int size, String name, mapType mt) throws WisardException {
+		init();    	
+		this.size = size;
+		this.name = name;
+		this.maptype = mt;
+		fininit();
+		computeMaps();
+	}
+
+	/**
+	 * Discriminator constructor
+	 * @param size the input binary input size
+	 * @param name of discriminator
+	 * @throws WisardException error in construction
+	 */
+	public Discriminator(int size, String name) throws WisardException {
+		init();    	
+		this.size = size;
+		this.name = name;
+		fininit();
+		computeMaps();
+	}
+	/**
+	 * Discriminator constructor
+	 * @param size the input binary input size
+	 * @throws WisardException error in construction
+	 */
+	public Discriminator(int size) throws WisardException {
+		init();    	
+		this.size = size;
+		fininit();
+		computeMaps();
+	}
+
+	/**
+	 * Check if the input is a legal tuple for the discriminator.
+	 * @param tuple the input tuple of keys
+	 * @return true if the input is a legal tuple for the discriminator
+	 */
+	public Boolean checkTuple(long[] tuple) {
+		if (tuple.length != this.n_ram) {
+			return false;
+		}
+		for (int i=0; i < tuple.length; i++) {
 			if (tuple[i] > (this.n_loc - (long)1)) {
 				return false;
 			}
 		}
 		return true;
-    	
-    }
-    /**
-     * Getter funtion for Memroy Image of discriminator.
-     * Upon access, the memory image is updated and stored internally in the discriminator
-     * @return memory max value of memory image 
-     */
-    double updateMI() {
-        int neuron, i, offset=0, b;
-        double maxvalue=0, value;
-        for (i=0; i< this.size; i++) this.mi[i] = 0;
-        for (neuron=0,offset=0;neuron<this.n_ram;neuron++,offset+=this.n_bit) {
-            Iterator<Wentry> it = this.rams[neuron].wentries.iterator (); 
-            while (it.hasNext ()) { 
-                Wentry entry = (Wentry) it.next (); 
-                for (b=0;b<this.n_bit;b++) {
-                	if (((entry.key)>>(long)(this.n_bit - 1 - b) & 1) > 0) {
-                        value = this.mi[this.map[(offset + b) % this.size]] += entry.value;
-                        if (maxvalue < value) maxvalue = value;
-                    }
-                }
-            } 
-        }
-        this.maxmi = maxvalue;
-        return maxvalue;
-    }
-    
-    /**
-     * Train on the discriminator on one sample of data.
-     * Before training, input data vector is scaled and discretized to a integer vector; 
-     * then binarized using the 'thermometer' encoding. 
-     * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
-     * 
-     * @param data the input vector of real numbers
-     * @param range the array of value intervals of each component of data
-     * @param off the array of offsets (min values) of each component of data
-     * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
-     * @param nattr the number of data vector components (attributes of sample data)
-     */
-    public void trainHisto(double data[], double range[], double off[], int z, int nattr) {
-        int neuron;
-        double retval;
-        this.tcounter++;
-        long address;
-        int x, i, index, npixels=z * nattr, value;
 
-        if (data.length != this.size) {
-        	
-        }
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            // compute neuron simulus
-            address=(long)0;
-            // decompose record data values into wisard input
-            for (i=0;i<this.n_bit;i++) {
-                x = this.map[(((neuron * this.n_bit) + i) % npixels)];
-                index = x/z;
-                value = (int) ((data[index] - off[index]) * z / range[index]);
-                if ((x % z) < value) {
-                    address |= mypowers[this.n_bit -1 - i];
-                }
-           }
-            retval = this.rams[neuron].write(address);
-            // update max key for neuron
-            if (retval > this.maxkeys[neuron].value) {
-                this.maxkeys[neuron].key = address;
-                this.maxkeys[neuron].value = retval;
-            }
-        }
-    }
-    /**
-     * Train on the discriminator on one input tuple of keys to access discriminators RAMs
-     * 
-     * @param tuple the input tuple of keys for RAMs
-     * @throws WisardException error if tuple is not legal for the discriminator
-     */
-    public void train(long[] tuple) throws WisardException {
-        int neuron;
-        double retval;
+	}
+	/**
+	 * Getter funtion for Memroy Image of discriminator.
+	 * Upon access, the memory image is updated and stored internally in the discriminator
+	 * @return memory max value of memory image 
+	 */
+	double updateMI() {
+		int neuron, i, offset=0, b;
+		double maxvalue=0, value;
+		for (i=0; i< this.size; i++) this.mi[i] = 0;
+		for (neuron=0,offset=0;neuron<this.n_ram;neuron++,offset+=this.n_bit) {
+			Iterator<Wentry> it = this.rams[neuron].wentries.iterator (); 
+			while (it.hasNext ()) { 
+				Wentry entry = (Wentry) it.next (); 
+				for (b=0;b<this.n_bit;b++) {
+					if (((entry.key)>>(long)(this.n_bit - 1 - b) & 1) > 0) {
+						value = this.mi[this.map[(offset + b) % this.size]] += entry.value;
+						if (maxvalue < value) maxvalue = value;
+					}
+				}
+			} 
+		}
+		this.maxmi = maxvalue;
+		return maxvalue;
+	}
+
+	/**
+	 * Train on the discriminator on one sample of data.
+	 * Before training, input data vector is scaled and discretized to a integer vector; 
+	 * then binarized using the 'thermometer' encoding. 
+	 * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
+	 * 
+	 * @param data the input vector of real numbers
+	 * @param range the array of value intervals of each component of data
+	 * @param off the array of offsets (min values) of each component of data
+	 * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
+	 * @param nattr the number of data vector components (attributes of sample data)
+	 */
+	public void trainHisto(double data[], double range[], double off[], int z, int nattr) {
+		int neuron;
+		double retval;
+		this.tcounter++;
+		long address;
+		int x, i, index, npixels=z * nattr, value;
+
+		if (data.length != this.size) {
+
+		}
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			// compute neuron simulus
+			address=(long)0;
+			// decompose record data values into wisard input
+			for (i=0;i<this.n_bit;i++) {
+				x = this.map[(((neuron * this.n_bit) + i) % npixels)];
+				index = x/z;
+				value = (int) ((data[index] - off[index]) * z / range[index]);
+				if ((x % z) < value) {
+					address |= mypowers[this.n_bit -1 - i];
+				}
+			}
+			retval = this.rams[neuron].write(address);
+			// update max key for neuron
+			if (retval > this.maxkeys[neuron].value) {
+				this.maxkeys[neuron].key = address;
+				this.maxkeys[neuron].value = retval;
+			}
+		}
+	}
+	/**
+	 * Train on the discriminator on one input tuple of keys to access discriminators RAMs
+	 * 
+	 * @param tuple the input tuple of keys for RAMs
+	 * @throws WisardException error if tuple is not legal for the discriminator
+	 */
+	public void train(long[] tuple) throws WisardException {
+		int neuron;
+		double retval;
 		if (!this.checkTuple(tuple)) throw new WisardException("Wrong tuple size or value");
-        this.tcounter++;
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            retval = this.rams[neuron].write(tuple[neuron]);
-            // update max key for ram
-            if (retval > this.maxkeys[neuron].value) {
-            	this.maxkeys[neuron].key = tuple[neuron];
-            	this.maxkeys[neuron].value = retval;
-            }
-        }
-    }
-    /**
-     * Classify one sample of data by summing-then-averaging responses of discriminators.
-     * (responses are not stored in discriminator objects).
-     * Before classification, input data vector is scaled and discretized to a integer vector; 
-     * then binarized using the 'thermometer' encoding. 
-     * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
-     * 
-     * @param data the input vector of real numbers
-     * @param range the array of value intervals of each component of data
-     * @param off the array of offsets (min values) of each component of data
-     * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
-     * @param nattr the number of data vector components (attributes of sample data)
-     * @return the classification response (a double in the range 0,1)
-     */
-    public double classifyHisto(double data[], double range[], double off[], int z, int nattr) {
-        int neuron, sum=0;
-        long address;
-        int x, i, index, npixels=z * nattr, value;
-        
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            // compute neuron simulus
-            address=(long)0;
-            // decompose record data values into wisard input
-            for (i=0;i<this.n_bit;i++) {
-                x = this.map[((neuron * this.n_bit) + i) % npixels];
-                index = x/z;
-                value = (int) ((data[index] - off[index]) * z / range[index]);
-                if ((x % z) < value) {
-                    address |= (long)mypowers[this.n_bit -1 - i];
-                }
-            }
-            if (this.rams[neuron].read(address) > 0) {
-                sum++;
-            }
-        }
-        // store responses
-        return (double)sum/(double)this.n_ram;
-    }
-    /** 
-     * Classify on an input tuple of keys to access discriminators RAMs.
-     * @param tuple the input tuple of keys for RAMs
-     * @return the classification response (a double in the range 0,1)
-     * @throws WisardException error if tuple is not legal for the discriminator
-     */
-    public double classify(long[] tuple) throws WisardException {
-        int neuron, sum=0;
-        
+		this.tcounter++;
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			retval = this.rams[neuron].write(tuple[neuron]);
+			// update max key for ram
+			if (retval > this.maxkeys[neuron].value) {
+				this.maxkeys[neuron].key = tuple[neuron];
+				this.maxkeys[neuron].value = retval;
+			}
+		}
+	}
+	/**
+	 * Classify one sample of data by summing-then-averaging responses of discriminators.
+	 * (responses are not stored in discriminator objects).
+	 * Before classification, input data vector is scaled and discretized to a integer vector; 
+	 * then binarized using the 'thermometer' encoding. 
+	 * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
+	 * 
+	 * @param data the input vector of real numbers
+	 * @param range the array of value intervals of each component of data
+	 * @param off the array of offsets (min values) of each component of data
+	 * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
+	 * @param nattr the number of data vector components (attributes of sample data)
+	 * @return the classification response (a double in the range 0,1)
+	 */
+	public double classifyHisto(double data[], double range[], double off[], int z, int nattr) {
+		int neuron, sum=0;
+		long address;
+		int x, i, index, npixels=z * nattr, value;
+
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			// compute neuron simulus
+			address=(long)0;
+			// decompose record data values into wisard input
+			for (i=0;i<this.n_bit;i++) {
+				x = this.map[((neuron * this.n_bit) + i) % npixels];
+				index = x/z;
+				value = (int) ((data[index] - off[index]) * z / range[index]);
+				if ((x % z) < value) {
+					address |= (long)mypowers[this.n_bit -1 - i];
+				}
+			}
+			if (this.rams[neuron].read(address) > 0) {
+				sum++;
+			}
+		}
+		// store responses
+		return (double)sum/(double)this.n_ram;
+	}
+	/** 
+	 * Classify on an input tuple of keys to access discriminators RAMs.
+	 * @param tuple the input tuple of keys for RAMs
+	 * @return the classification response (a double in the range 0,1)
+	 * @throws WisardException error if tuple is not legal for the discriminator
+	 */
+	public double classify(long[] tuple) throws WisardException {
+		int neuron, sum=0;
+
 		if (!this.checkTuple(tuple)) throw new WisardException("Wrong tuple size or value");
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            if (this.rams[neuron].read(tuple[neuron]) > 0) {
-                sum++;
-            }
-        }
-        // store responses
-        return (double)(sum/(double)this.n_ram);
-    }
-    /**
-     * Computes (and stores) responses of each discriminator on one sample of data.
-     * Before getting responses, input data vector is scaled and discretized to a integer vector; 
-     * then binarized using the 'thermometer' encoding. 
-     * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
-     * 
-     * @param data the input vector of real numbers
-     * @param range the array of value intervals of each component of data
-     * @param off the array of offsets (min values) of each component of data
-     * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
-     * @param nattr the number of data vector components (attributes of sample data)
-     */
-    public void responseHisto(double data[], double range[], double off[], int z, int nattr) {
-        int neuron;
-        long address;
-        int x, i, index, npixels=z * nattr, value;
-        
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            // compute neuron simulus
-            address=(long)0;
-            // decompose record data values into wisard input
-            for (i=0;i<this.n_bit;i++) {
-                x = this.map[((neuron * this.n_bit) + i) % npixels];
-                index = x/z;
-                value = (int) ((data[index] - off[index]) * z / range[index]);
-                if ((x % z) < value) {
-                    address |= (long)mypowers[this.n_bit -1 - i];
-                }
-            }
-            this.response[neuron] = this.rams[neuron].read(address);
-        }
-    }
-    /**
-     * Computes (and stores) responses of each discriminator on an input tuple of keys to access discriminators RAMs.
-     * @param tuple the input tuple of keys for RAMs
-     * @throws WisardException error if tuple is not legal for the discriminator
-     */
-    public void response(long[] tuple) throws WisardException {
-        int neuron;
-        
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			if (this.rams[neuron].read(tuple[neuron]) > 0) {
+				sum++;
+			}
+		}
+		// store responses
+		return (double)(sum/(double)this.n_ram);
+	}
+	/**
+	 * Computes (and stores) responses of each discriminator on one sample of data.
+	 * Before getting responses, input data vector is scaled and discretized to a integer vector; 
+	 * then binarized using the 'thermometer' encoding. 
+	 * the resulting binary vector is transformed to a set of keys to access discriminators RAMs. 
+	 * 
+	 * @param data the input vector of real numbers
+	 * @param range the array of value intervals of each component of data
+	 * @param off the array of offsets (min values) of each component of data
+	 * @param z the range of integer values (from 0 to z-1) the datum may assume after discretization 
+	 * @param nattr the number of data vector components (attributes of sample data)
+	 */
+	public void responseHisto(double data[], double range[], double off[], int z, int nattr) {
+		int neuron;
+		long address;
+		int x, i, index, npixels=z * nattr, value;
+
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			// compute neuron simulus
+			address=(long)0;
+			// decompose record data values into wisard input
+			for (i=0;i<this.n_bit;i++) {
+				x = this.map[((neuron * this.n_bit) + i) % npixels];
+				index = x/z;
+				value = (int) ((data[index] - off[index]) * z / range[index]);
+				if ((x % z) < value) {
+					address |= (long)mypowers[this.n_bit -1 - i];
+				}
+			}
+			this.response[neuron] = this.rams[neuron].read(address);
+		}
+	}
+	/**
+	 * Computes (and stores) responses of each discriminator on an input tuple of keys to access discriminators RAMs.
+	 * @param tuple the input tuple of keys for RAMs
+	 * @throws WisardException error if tuple is not legal for the discriminator
+	 */
+	public void response(long[] tuple) throws WisardException {
+		int neuron;
+
 		if (!this.checkTuple(tuple)) throw new WisardException("Wrong tuple size or value");
-        for (neuron=0;neuron<this.n_ram;neuron++) {
-            this.response[neuron] = this.rams[neuron].read(tuple[neuron]);
-        }
-    }
-    /**
-     * Print funtion for discriminator
-     * @return the printout (string) of the discriminator info
-     */
-    public String toString() {
+		for (neuron=0;neuron<this.n_ram;neuron++) {
+			this.response[neuron] = this.rams[neuron].read(tuple[neuron]);
+		}
+	}
+	/**
+	 * Print funtion for discriminator
+	 * @return the printout (string) of the discriminator info
+	 */
+	public String toString() {
 		int neuron, i;
 		String str = "[";
 		str += String.format("class: %s bits: %d, nram: %d, loc: %d\n", this.name, this.n_bit, this.n_ram, this.n_loc);
@@ -470,12 +471,12 @@ public class Discriminator implements Serializable, RevisionHandler {
 		for (neuron = 0; neuron < this.n_ram; neuron++) {
 			str += this.rams[neuron].toString();
 		}
-        return str +  "]\n";
+		return str +  "]\n";
 	}
-    /**
-     * Print memory inage of discriminator
-     * @return the printout (string) of the memory image
-     */
+	/**
+	 * Print memory inage of discriminator
+	 * @return the printout (string) of the memory image
+	 */
 	public String MItoString() {
 		String str = "[MI = \n";
 		int i;
@@ -483,19 +484,19 @@ public class Discriminator implements Serializable, RevisionHandler {
 		for (i=0; i < this.mi.length; i++) {
 			str += String.format("%.0f ", this.mi[i]);
 		}
-        return str +  "]\n";
+		return str +  "]\n";
 	}
-    /**
-     * Return memory image of discriminator
-     * @return a vector of double representing the memory image
-     */
+	/**
+	 * Return memory image of discriminator
+	 * @return a vector of double representing the memory image
+	 */
 	public double[] MItoVector() {
 		mi = new double[this.mi.length];
 		for (int i=0; i < this.mi.length; i++)
 			mi[i] = this.mi[i];
 		return mi;
 	}
-	
+
 	/**
 	 * Get revision number
 	 * @return revision number
@@ -505,7 +506,7 @@ public class Discriminator implements Serializable, RevisionHandler {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**	
 	 * Getter for number of RAMs 
 	 * @return number of RAMs
@@ -591,7 +592,7 @@ public class Discriminator implements Serializable, RevisionHandler {
 			System.out.println(exc);
 			System.out.println("Problem in Wisard!");
 		}
-		
+
 	}
 
 }

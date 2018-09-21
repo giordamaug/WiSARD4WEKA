@@ -32,7 +32,7 @@ Description= A multi-class classification method based on the WiSARD weightless 
 PackageURL=https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
 
 # URL for further information
-#URL=http://weka.sourceforge.net/doc.packages/multiBoostAB
+URL=https://github.com/giordamaug/WiSARD4WEKA
 
 # Enhances various other packages ?
 # Enhances=packageName1,packageName2,...

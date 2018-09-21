@@ -70,7 +70,7 @@ This repository includes a pre-build package (in zip format) of WiSARD4WEKA that
 install from the the PackageManager of your Weka distribution:
 
 <pre>
-$ java -cp <your-path-to-weka.jar> weka.core.WekaPackageManager -install-package https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
+$ java -cp your-path-to-weka.jar weka.core.WekaPackageManager -install-package https://github.com/giordamaug/WiSARD4WEKA/releases/download/v.1.0.1/WiSARD.zip
 </pre>
 
 # Use

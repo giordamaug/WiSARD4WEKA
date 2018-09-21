@@ -916,12 +916,11 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 
 		first = second = Integer.MIN_VALUE;
 		for (int i = 1; i < results.length; i++) {
-			if (results[i] > first) { /* If current element is smaller than first then update both first and second */
+			if (results[i] > first) { /* If current element is greater than first then update both first and second */
 				second = first;
 				first = results[i];
 				firstIndex = i;
-			} else if (results[i] > second && results[i] != first)   /* If element in between first and 
-	            second then update second  */
+			} else if (results[i] > second && results[i] != first)   /* If element in between first and second then update second  */
 				second = results[i];
 		}
 		// if max is zero, confidence is zero
@@ -934,7 +933,7 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 		if (second == Integer.MIN_VALUE)
 			return -1;
 		else
-			return (1 - second / first);
+			return (1 - (float) second / (float) first);
 
 	}
 

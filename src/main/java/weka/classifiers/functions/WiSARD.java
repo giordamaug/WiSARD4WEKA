@@ -128,7 +128,7 @@ import weka.filters.unsupervised.attribute.ReplaceMissingValues;
 // </pre>
 
 public class WiSARD extends AbstractClassifier
-implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
+implements OptionHandler, TechnicalInformationHandler {
 
 	/** The training instances used for classification. */
 	private Instances origInstances;
@@ -349,7 +349,7 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 		/**
 		 * at least 1 instance has to be in the dataset
 		 */
-		result.setMinimumNumberInstances(1);
+		//result.setMinimumNumberInstances(1);
 
 		return result;
 	}
@@ -402,6 +402,7 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 		/**
 		 *  test data against capabilities
 		 */
+		//System.out.println(String.format("Training samples %d",instances.numInstances()));
 		getCapabilities().testWithFail(instances);
 
 		origInstances = new Instances(instances);
@@ -537,7 +538,6 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 	 * @exception Exception if the instance could not be incorporated in
 	 * the model.
 	 */
-	@Override
 	public void updateClassifier(Instance instance) throws Exception {
 		// if datum has no classs... do nothing
 		if (instance.classIsMissing()) return;
@@ -636,6 +636,9 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 					}
 					break;
 				}
+				for (int c=0; c < m_NClasses; c++) 
+					System.out.println(String.format("%f ",result_partial[c]));
+				System.out.println("\n");
 			}
 			if (pSum == 0) {
 				for (int c=0; c < m_NClasses; c++) {
@@ -902,7 +905,7 @@ implements OptionHandler, TechnicalInformationHandler, UpdateableClassifier {
 	 *
 	 * @param argv the options
 	 */
-	public static void main(String [] argv) {
+	public static void main(String[] argv) {
 		runClassifier(new WiSARD(), argv);
 	}
 

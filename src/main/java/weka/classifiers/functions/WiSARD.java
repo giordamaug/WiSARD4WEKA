@@ -87,7 +87,7 @@ import weka.filters.unsupervised.attribute.ReplaceMissingValues;
  * <!-- options-start --> <b>Valid options are:</b>
  * 
  * <pre>
- * -B &lt;bitno&gt;
+ * -N &lt;bitno&gt;
  * The bit resolution. The value is an integer between 1 and 32.
  * </pre>
  * 
@@ -106,26 +106,26 @@ import weka.filters.unsupervised.attribute.ReplaceMissingValues;
  * Seed for random mapping. Can be -1 (no seed) of a valid noninteger seed.
  * </pre>
  * 
+ *<pre>
+ * -B
+ * Ture to enable bleaching algorithm (tie resolution). False for disabling it.
+ * </pre>
+ * 
+ * <pre>
+ * -Bs &lt;step&gt;
+ * Set bleaching step [nonegative real]
+ * </pre>
+ * 
+ * <pre>
+ * -Bc &lt;confidence&gt;
+ * Set bleaching confidence [real in 0,1]
+ * </pre>
  *
  * <!-- options-end -->
  * 
  * @author Maurizio Giordano (maurizio.giordano@cnr.it)
  * @version $Revision: 1.0.1 $
  */
-//<pre>
-// -F
-// Ture to enable bleaching algorithm (tie resolution). False for disabling it.
-// </pre>
-// 
-// <pre>
-// -s &lt;step&gt;
-// Set bleaching step [nonegative real]
-// </pre>
-// 
-// <pre>
-// -c &lt;confidence&gt;
-// Set bleaching confidence [real in 0,1]
-// </pre>
 
 public class WiSARD extends AbstractClassifier
 implements OptionHandler, TechnicalInformationHandler {
@@ -265,44 +265,44 @@ implements OptionHandler, TechnicalInformationHandler {
 	/**
 	 * @return bleaching step parameter.
 	 */
-	/** public double getBleachStep() {
+	public double getBleachStep() {
 		return m_BleachStep;
-	} */
+	}
 
 	/**
 	 * @param step is the bleaching steping parameter.
 	 */
-	/** public void setBleachStep(double step) {
+	public void setBleachStep(double step) {
 		this.m_BleachStep = step;
-	} */
+	}
 
 	/**
 	 * @return Tooltip text describing the bleachFlag option
 	 */
-	/** public String bleachStepTipText() {
+	public String bleachStepTipText() {
 		return "Set the bleaching stepping";
-	} */
+	}
 
 	/**
 	 * @return bleaching confidence parameter.
 	 */
-	/** public double getBleachConfidence() {
+	public double getBleachConfidence() {
 		return m_BleachConfidence;
-	} */
+	}
 
 	/**
 	 * @param confidence is the bleaching confidence parameter.
 	 */
-	/** public void setBleachConfidence(double confidence) {
+	public void setBleachConfidence(double confidence) {
 		this.m_BleachConfidence = confidence;
-	} */
+	}
 
 	/**
 	 * @return Tooltip text describing the bleachConfidence option
 	 */
-	/** public String bleachConfidenceTipText() {
+	public String bleachConfidenceTipText() {
 		return "Set the bleaching confidence";
-	} */
+	}
 
 	/**
 	 * @return random mapping seed.
@@ -601,7 +601,7 @@ implements OptionHandler, TechnicalInformationHandler {
 		/**
 		 *  get wisard predictions
 		 */
-		if (this.m_BleachFlag)  {    // Bleaching is enabled
+		if (getBleachFlag())  {    // Bleaching is enabled
 			double b = this.m_BleachStep;
 			double confidence = 0.0;
 			int n_rams = this.darray[0].getN_ram();
@@ -714,13 +714,13 @@ implements OptionHandler, TechnicalInformationHandler {
 
 		result = new Vector();
 
-		result.add(new Option("\tSet bit resolution\n","B", 16,"-B <bitno>"));
+		result.add(new Option("\tSet bit resolution\n","N", 16,"-N <bitno>"));
 		result.addElement(new Option("\tSet scaling range\n","S", 128,"-S <ticno>"));
 		result.addElement(new Option("\tSet mapping type [linear, random]\n", "M <maptype>", mapType.RANDOM.ordinal(),"-M"));
 		result.addElement(new Option("\tSet mapping seed\n", "m", -1,"-m <seed>"));
-		result.addElement(new Option("\tEnable Bleaching\n", "F", 0,"-F"));
-		//result.addElement(new Option("\tSet Bleaching step\n", "s", 1,"-s <step>"));
-		//result.addElement(new Option("\tSet Bleaching confidence\n", "c", 1,"-c <confidence>"));
+		result.addElement(new Option("\tEnable Bleaching\n", "B", 0,"-B"));
+		result.addElement(new Option("\tSet Bleaching step\n", "Bs", 1,"-Bs <step>"));
+		result.addElement(new Option("\tSet Bleaching confidence\n", "Bc", 1,"-Bc <confidence>"));
 
 		en = super.listOptions();
 		while (en.hasMoreElements())
@@ -749,7 +749,7 @@ implements OptionHandler, TechnicalInformationHandler {
 	 * <!-- options-start --> * Valid options are: <p> * *
 	 * 
 	 * <pre>
-	 * -B &lt;bitno&gt;
+	 * -N &lt;bitno&gt;
 	 * * The bit resolution. The value is an integer between 1 and 32.
 	 * </pre>
 	 * 
@@ -768,36 +768,36 @@ implements OptionHandler, TechnicalInformationHandler {
 	 * * Seed for random mapping. Can be -1 (no seed) of a valid noninteger seed.
 	 * </pre>
 	 * 
+	 * <pre>
+	 * -B
+	 * True to enable bleaching algorithm (tie resolution). False for disabling it.
+	 * </pre>
+	 *  
+	 * <pre>
+	 *  -Bs &lt;step&gt;
+	 *  Set bleaching step [nonegative real]
+	 * </pre>
+	 *  
+	 *  <pre>
+	 *  -Bc &lt;confidence&gt;
+	 *  Set bleaching confidence [real in 0,1]
+	 *  </pre>
+	 * 
 	 * * <!-- options-end -->
 	 * @param options {@inheritDoc}
 	 */
-	// <pre>
-	// -F
-	// True to enable bleaching algorithm (tie resolution). False for disabling it.
-	// </pre>
-	//  
-	// <pre>
-	//  -s &lt;step&gt;
-	//  Set bleaching step [nonegative real]
-	//  </pre>
-	//  
-	//  <pre>
-	//  -c &lt;confidence&gt;
-	//  Set bleaching confidence [real in 0,1]
-	//  </pre>
-	// 
 	@Override
 	public void setOptions(String[] options) {
 		try {
 			String optionString;
 			// parse flag option
-			if (Utils.getFlag('F', options)) setBleachFlag(true);
+			if (Utils.getFlag('B', options)) setBleachFlag(true);
 			else 
 				setBleachFlag(false);
 			/**
 			 *  parse integer options
 			 */
-			optionString = Utils.getOption('B', options);
+			optionString = Utils.getOption('N', options);
 			if (optionString.length() != 0) 
 				setBitNo(Integer.parseInt(optionString));
 			else
@@ -815,16 +815,16 @@ implements OptionHandler, TechnicalInformationHandler {
 			/**
 			 *  parse float options
 			 */
-			/* optionString = Utils.getOption('s', options);
+			optionString = Utils.getOption("Bs", options);
 			if (optionString.length() != 0) 
 				setBleachStep(Double.parseDouble(optionString));
 			else
 				setBleachStep(1.0);
-			optionString = Utils.getOption('c', options);
+			optionString = Utils.getOption("Bc", options);
 			if (optionString.length() != 0) 
 				setBleachConfidence(Double.parseDouble(optionString));
 			else
-				setBleachConfidence(0.01); */
+				setBleachConfidence(0.01);
 			/**
 			 *  parse string (enum) options
 			 */
@@ -853,13 +853,13 @@ implements OptionHandler, TechnicalInformationHandler {
 		String[] options;
 		Vector<String>    	result = new Vector<>();
 
-		if (getBleachFlag()) result.add("-F"); 
-		result.add("-B"); result.add(String.format("%d",getBitNo()));
+		if (getBleachFlag()) result.add("-B"); 
+		result.add("-N"); result.add(String.format("%d",getBitNo()));
 		result.add("-S"); result.add(String.format("%d",getTicNo()));
 		result.add("-M"); result.add(String.format("%s",getMapType().name()));
 		result.add("-m"); result.add(String.format("%d", getSeed()));
-		//result.add("-s"); result.add(String.format(Locale.US,"%.3f",getBleachStep()));
-		//result.add("-c"); result.add(String.format(Locale.US,"%.3f",getBleachConfidence()));
+		result.add("-Bs"); result.add(String.format(Locale.US,"%.3f",getBleachStep()));
+		result.add("-Bc"); result.add(String.format(Locale.US,"%.3f",getBleachConfidence()));
 
 		options = super.getOptions();
 		for (i = 0; i < options.length; i++)

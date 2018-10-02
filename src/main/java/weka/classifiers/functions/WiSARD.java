@@ -244,23 +244,23 @@ implements OptionHandler, TechnicalInformationHandler {
 	/**
 	 * @return bleaching enabling flag.
 	 */
-	/** public boolean getBleachFlag() {
+	public boolean getBleachFlag() {
 		return m_BleachFlag;
-	} */
+	}
 
 	/**
 	 * @param flag is True if bleaching is enblaed, False for disabling it.
 	 */
-	/** public void setBleachFlag(boolean flag) {
+	public void setBleachFlag(boolean flag) {
 		this.m_BleachFlag = flag;
-	} */
+	}
 
 	/**
 	 * @return Tooltip text describing the bleachFlag option
 	 */
-	/** public String bleachFlagTipText() {
+	public String bleachFlagTipText() {
 		return "Enable the bleaching algorithm";
-	} */
+	}
 
 	/**
 	 * @return bleaching step parameter.
@@ -610,17 +610,21 @@ implements OptionHandler, TechnicalInformationHandler {
 				this.darray[c].responseHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
 			}
 			int[] result_partial = new int[m_NClasses];
+			System.out.print(String.format("B:%f C:%f\n",b,this.m_BleachConfidence));
 			while (confidence < this.m_BleachConfidence) {
 				pSum = 0;
 				for (int c=0; c < m_NClasses; c++) {   
 					result_partial[c] = 0;
 					for (int neuron = 0; neuron < n_rams; neuron++) {
-						if (this.darray[c].getResponse()[neuron] > b)
+						if (this.darray[c].getResponse()[neuron] >= b)
 							result_partial[c]++;
 					}
 					pSum += result_partial[c];
 				}
+				for (int c=0; c < m_NClasses; c++) 
+					System.out.print(String.format("%d ",result_partial[c]));
 				confidence = calc_confidence(result_partial);
+				System.out.print(String.format(" %f\n", confidence));
 				if (confidence < 0)
 					throw new Exception("Something wrong in Bleaching algorithm!");
 				b += 1.0;
@@ -636,10 +640,8 @@ implements OptionHandler, TechnicalInformationHandler {
 					}
 					break;
 				}
-				for (int c=0; c < m_NClasses; c++) 
-					System.out.println(String.format("%f ",result_partial[c]));
-				System.out.println("\n");
 			}
+			System.out.print("\n");
 			if (pSum == 0) {
 				for (int c=0; c < m_NClasses; c++) {
 					dist[c] = 0.0;
@@ -717,7 +719,7 @@ implements OptionHandler, TechnicalInformationHandler {
 		result.addElement(new Option("\tSet scaling range\n","S", 128,"-S <ticno>"));
 		result.addElement(new Option("\tSet mapping type [linear, random]\n", "M <maptype>", mapType.RANDOM.ordinal(),"-M"));
 		result.addElement(new Option("\tSet mapping seed\n", "m", -1,"-m <seed>"));
-		//result.addElement(new Option("\tEnable Bleaching\n", "F", 0,"-F"));
+		result.addElement(new Option("\tEnable Bleaching\n", "F", 0,"-F"));
 		//result.addElement(new Option("\tSet Bleaching step\n", "s", 1,"-s <step>"));
 		//result.addElement(new Option("\tSet Bleaching confidence\n", "c", 1,"-c <confidence>"));
 
@@ -790,9 +792,9 @@ implements OptionHandler, TechnicalInformationHandler {
 		try {
 			String optionString;
 			// parse flag option
-			/* if (Utils.getFlag('F', options)) setBleachFlag(true);
+			if (Utils.getFlag('F', options)) setBleachFlag(true);
 			else 
-				setBleachFlag(false); */
+				setBleachFlag(false);
 			/**
 			 *  parse integer options
 			 */
@@ -852,7 +854,7 @@ implements OptionHandler, TechnicalInformationHandler {
 		String[] options;
 		Vector<String>    	result = new Vector<>();
 
-		//if (getBleachFlag()) result.add("-F"); 
+		if (getBleachFlag()) result.add("-F"); 
 		result.add("-B"); result.add(String.format("%d",getBitNo()));
 		result.add("-S"); result.add(String.format("%d",getTicNo()));
 		result.add("-M"); result.add(String.format("%s",getMapType().name()));
@@ -919,13 +921,14 @@ implements OptionHandler, TechnicalInformationHandler {
 		int first, second, firstIndex=0;
 
 		first = second = Integer.MIN_VALUE;
-		for (int i = 1; i < results.length; i++) {
+		for (int i = 0; i < results.length; i++) {
 			if (results[i] > first) { /* If current element is greater than first then update both first and second */
 				second = first;
 				first = results[i];
 				firstIndex = i;
-			} else if (results[i] > second && results[i] != first)   /* If element in between first and second then update second  */
+			} else if (results[i] > second && results[i] != first) {  /* If element in between first and second then update second  */
 				second = results[i];
+			}
 		}
 		// if max is zero, confidence is zero
 		if (first == 0) return 0;
@@ -933,7 +936,6 @@ implements OptionHandler, TechnicalInformationHandler {
 		for (int i = 0; i < results.length; i++)
 			if (results[i] == first && i != firstIndex)
 				return 0;   // with two max confidence is zero
-
 		if (second == Integer.MIN_VALUE)
 			return -1;
 		else

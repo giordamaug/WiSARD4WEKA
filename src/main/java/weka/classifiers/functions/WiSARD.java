@@ -402,7 +402,6 @@ implements OptionHandler, TechnicalInformationHandler {
 		/**
 		 *  test data against capabilities
 		 */
-		//System.out.println(String.format("Training samples %d",instances.numInstances()));
 		getCapabilities().testWithFail(instances);
 
 		origInstances = new Instances(instances);
@@ -610,7 +609,7 @@ implements OptionHandler, TechnicalInformationHandler {
 				this.darray[c].responseHisto(mdata,this.ranges,this.mins,this.m_TicNo,m_NFeatures);
 			}
 			int[] result_partial = new int[m_NClasses];
-			System.out.print(String.format("B:%f C:%f\n",b,this.m_BleachConfidence));
+			//System.out.print(String.format("B:%f C:%f\n",b,this.m_BleachConfidence));
 			while (confidence < this.m_BleachConfidence) {
 				pSum = 0;
 				for (int c=0; c < m_NClasses; c++) {   
@@ -621,10 +620,10 @@ implements OptionHandler, TechnicalInformationHandler {
 					}
 					pSum += result_partial[c];
 				}
-				for (int c=0; c < m_NClasses; c++) 
-					System.out.print(String.format("%d ",result_partial[c]));
+				//for (int c=0; c < m_NClasses; c++) 
+				//	System.out.print(String.format("%d ",result_partial[c]));
 				confidence = calc_confidence(result_partial);
-				System.out.print(String.format(" %f\n", confidence));
+				//System.out.print(String.format(" %f\n", confidence));
 				if (confidence < 0)
 					throw new Exception("Something wrong in Bleaching algorithm!");
 				b += 1.0;
@@ -641,7 +640,7 @@ implements OptionHandler, TechnicalInformationHandler {
 					break;
 				}
 			}
-			System.out.print("\n");
+			//System.out.print("\n");
 			if (pSum == 0) {
 				for (int c=0; c < m_NClasses; c++) {
 					dist[c] = 0.0;
@@ -937,7 +936,7 @@ implements OptionHandler, TechnicalInformationHandler {
 			if (results[i] == first && i != firstIndex)
 				return 0;   // with two max confidence is zero
 		if (second == Integer.MIN_VALUE)
-			return -1;
+			return -1;  // error
 		else
 			return (1 - (float) second / (float) first);
 

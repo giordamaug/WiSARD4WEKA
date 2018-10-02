@@ -108,7 +108,7 @@ import weka.filters.unsupervised.attribute.ReplaceMissingValues;
  * 
  *<pre>
  * -B
- * Ture to enable bleaching algorithm (tie resolution). False for disabling it.
+ * True to enable bleaching algorithm (tie resolution). False for disabling it.
  * </pre>
  * 
  * <pre>

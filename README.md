@@ -16,7 +16,7 @@ A WiSARD is formed by as many discriminators as the number of classes it has to 
 Each discriminator consists of a set of <i>N</i> RAMs that, during the training phase, l
 earn the occurrences of <i>n</i>-tuples extracted from the input binary vector (the <i>retina</i>).
 
-In the WiSARD model, <i>n</i>-tuples selected from the input binary vector are regarded as the “features” of the input pattern to be recognized. It has been demonstrated in literature [14] that the randomness of feature extraction makes WiSARD more sensitive to detect global features than an ordered map which makes a single layer system sensitive to detect local features.
+In the WiSARD model, <i>n</i>-tuples selected from the input binary vector are regarded as the “features” of the input pattern to be recognised. It has been demonstrated in literature [14] that the randomness of feature extraction makes WiSARD more sensitive to detect global features than an ordered map which makes a single layer system sensitive to detect local features.
 
 More information and details about the WiSARD neural network model can be found in Aleksander and Morton's book [Introduction to neural computing](https://books.google.co.uk/books/about/An_introduction_to_neural_computing.html?id=H4dQAAAAMAAJ&redir_esc=y&hl=it).
 
